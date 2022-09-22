@@ -23,7 +23,7 @@ import {todo, project} from './factories';
 
     // Makes new project form appear when new project button is clicked
     const newProject = document.getElementsByClassName('newProject');
-    newProject.item(0).addEventListener('click', (button) => {
+    newProject.item(0).addEventListener('click', () => {
         openPForm();
     });
 
@@ -43,5 +43,17 @@ import {todo, project} from './factories';
     const projectCancel = document.getElementById('projectCancel');
     projectCancel.addEventListener('click', () => {
         closePForm();
+    });
+
+    // Makes new to-do form appear when to-do button is clicked
+    const newTodo = document.getElementsByClassName('newTodo');
+    newTodo.item(0).addEventListener('click', () => {
+        openTDForm();
+    });
+
+    // Cancel button closes to-do form
+    const todoCancel = document.getElementById('todoCancel');
+    todoCancel.addEventListener('click', () => {
+        closeTDForm();
     });
 })();
