@@ -29,6 +29,47 @@
                 </div>
             </div>
 
+            <!--Form to submit a new to-do-->
+            <form id="todo">
+                <div>
+                    <input type="text" id="title" name="title">
+                    <label for="title">Title</label>
+                </div>
+
+                <div>
+                    <input type="text" id="description" name="description">
+                    <label for="description">Description</label>
+                </div>
+
+                <div>
+                    <input type="date" id="dueDate" name="dueDate">
+                    <label for="dueDate">Due Date</label>
+                </div>
+
+                <div>
+                    <p>What priority level is this to-do?</p>
+                    <input type="radio" id="high" name="high" value="high">
+                    <label for="high">High</label>
+                    <input type="radio" id="mid" name="mid" value="mid">
+                    <label for="mid">Mid</label>
+                    <input type="radio" id="low" name="low" value="low">
+                    <label for="low">Low</label>
+                    <input type="radio" id="none" name="none" value="none">
+                    <label for="none">None</label>
+                </div>
+
+                <div>
+                    <textarea id="notes" name="notes">Notes</textarea>
+                </div>
+
+                <div>
+                    <button>Submit</button>
+                    <button>Cancel</button>
+                </div>
+            </form>
+
+            <!--Form to submit a new project-->
+
             <!--Container for entire to-do list contents and footer-->
             <div class="listContainer">
                 <!--Todo contents-->
