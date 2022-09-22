@@ -1,0 +1,32 @@
+/*Removes margin and padding from all elements*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.mainContainer {
+    display: flex;
+}
+
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+}
+
+.content {
+    flex: 1;
+}
+
+.sidebar {
+    background-color: brown;
+}
+
+header {
+    background-color: green;
+}
