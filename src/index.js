@@ -8,4 +8,15 @@ import {todo, project} from './factories';
         const projectForm = document.getElementById('newProject');
         projectForm.style.display = 'block';
     });
+
+    // Creates a General project and an array to hold all projects
+    const generalP = {name: 'General', list: []};
+    const projects = [generalP];
+
+    // Adds a new project object to 'projects' array
+    const projectSubmit = document.getElementById('projectSubmit');
+    projectSubmit.addEventListener('click', () => {
+        projects.push(project(document.getElementById('projectName').value));
+        console.log(projects);
+    });
 })();
