@@ -89,6 +89,12 @@ const addProject = (name, projects, currentProject, generalP, projectObject) => 
     // Changes project priority
     projectPriorityButton.addEventListener('click', () => {
         openPPCForm();
+
+        // Closes priority change form
+        const ppcCancel = document.getElementById('ppcCancel');
+        ppcCancel.addEventListener('click', () => {
+            closePPCForm();
+        });
     });
 
 };
