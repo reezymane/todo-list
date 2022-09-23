@@ -1,6 +1,7 @@
 import './style.css';
 import {todo, project} from './factories';
 import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
+import {addProject, projectPri} from './newProject';
 
 (() => {
     // Makes new project form appear when new project button is clicked
@@ -13,10 +14,14 @@ import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
     const generalP = {name: 'General', list: []};
     const projects = [generalP];
 
-    // Adds a new project object to 'projects' array
+    // Submits a new project object to 'projects' array and displays in sidebar
     const projectSubmit = document.getElementById('projectSubmit');
     projectSubmit.addEventListener('click', () => {
-        projects.push(project(document.getElementById('projectName').value));
+        projects.push(project(document.getElementById('projectName').value,
+            document.getElementById('projectDueDate').value,
+            projectPri()));
+
+        addProject(document.getElementById('projectName').value);
 
         closePForm();
     });
