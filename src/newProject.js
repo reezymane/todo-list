@@ -28,4 +28,17 @@ const projectPri = () => {
     };
 };
 
-export {addProject, projectPri};
+// Populates content div with current project info
+const clickProject = (name) => {
+    const projectInfo = document.getElementById(name);
+    projectInfo.addEventListener('click', () => {
+        const currentTitle = document.getElementsByClassName('currentTitle');
+
+        const currentDisplay = document.createElement('p');
+        currentDisplay.textContent = name;
+
+        currentTitle.item(0).appendChild(currentDisplay);
+    });
+};
+
+export {addProject, projectPri, clickProject};
