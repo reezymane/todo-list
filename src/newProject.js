@@ -29,9 +29,13 @@ const projectPri = () => {
 };
 
 // Populates content div with current project info
-const clickProject = (name, projectObject) => {
+const clickProject = (name, projectObject, currentProject) => {
     const projectInfo = document.getElementById(name);
     projectInfo.addEventListener('click', () => {
+        // Changes currentProject
+        currentProject = name;
+        console.log(currentProject);
+
         // Removes existing project name, dueDate, and priority
         const currentTitle = document.getElementsByClassName('currentTitle');
         const projectDue = document.getElementsByClassName('projectDue');
@@ -69,6 +73,18 @@ const clickProject = (name, projectObject) => {
         };
 
         projectDue.item(0).appendChild(priorityDisplay);
+
+        // Displays current project's to-do list
+        const todoList = document.getElementsByClassName('todoList');
+        const listDiv = document.createElement('div');
+        todoList.item(0).appendChild(listDiv);
+        
+        for (const [key, value] of Object.entries(projectObject)) {
+            if (key === 'list') {
+                //value.forEach( Add function to display to-do's );
+            };
+        };
+        
     });
 };
 
