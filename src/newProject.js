@@ -1,4 +1,4 @@
-import { generalProject } from "./generalProject";
+import { generalProject } from './generalProject';
 
 // Adds new projects to sidebar
 const addProject = (name, projects, currentProject, generalP) => {
