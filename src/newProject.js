@@ -18,4 +18,14 @@ const addProject = (name) => {
     newAdd.appendChild(newName);
 };
 
-export {addProject};
+// Gets value for radio button selection
+const projectPri = () => {
+    const projectRadio = document.getElementsByName('projectPriority');
+    for (let i = 0; i < projectRadio.length; i++) {
+        if (projectRadio[i].checked) {
+            return projectRadio[i].value;
+        };
+    };
+};
+
+export {addProject, projectPri};
