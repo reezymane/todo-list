@@ -1,7 +1,7 @@
 import './style.css';
 import {todo, project} from './factories';
 import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
-import {addProject, projectPri} from './newProject';
+import {addProject, projectPri, clickProject} from './newProject';
 
 (() => {
     // Makes new project form appear when new project button is clicked
@@ -22,6 +22,8 @@ import {addProject, projectPri} from './newProject';
             projectPri()));
 
         addProject(document.getElementById('projectName').value);
+
+        clickProject(document.getElementById('projectName').value);
 
         closePForm();
     });
