@@ -17,13 +17,15 @@ import {addProject, projectPri, clickProject} from './newProject';
     // Submits a new project object to 'projects' array and displays in sidebar
     const projectSubmit = document.getElementById('projectSubmit');
     projectSubmit.addEventListener('click', () => {
-        projects.push(project(document.getElementById('projectName').value,
+        const projectObject = project(document.getElementById('projectName').value,
             document.getElementById('projectDueDate').value,
-            projectPri()));
+            projectPri())
+        
+        projects.push(projectObject);
 
         addProject(document.getElementById('projectName').value);
 
-        clickProject(document.getElementById('projectName').value);
+        clickProject(document.getElementById('projectName').value, projectObject);
 
         closePForm();
     });
