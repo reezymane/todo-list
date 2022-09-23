@@ -1,5 +1,7 @@
+import { generalProject } from "./generalProject";
+
 // Adds new projects to sidebar
-const addProject = (name, projects) => {
+const addProject = (name, projects, currentProject, generalP) => {
     // Adds project name
     const projectList = document.getElementsByClassName('projects');
     
@@ -56,6 +58,20 @@ const addProject = (name, projects) => {
             };
 
             indexCount++;
+
+        // Removes existing project name, dueDate, and priority and changes display to General project
+        const currentTitle = document.getElementsByClassName('currentTitle');
+        const projectDue = document.getElementsByClassName('projectDue');
+
+        while (currentTitle.item(0).firstChild != null) {
+            currentTitle.item(0).removeChild(currentTitle.item(0).firstChild);
+        };
+
+        while (projectDue.item(0).firstChild != null) {
+            projectDue.item(0).removeChild(projectDue.item(0).firstChild);
+        };
+
+        generalProject(currentProject, generalP);
         });
     });
 };
