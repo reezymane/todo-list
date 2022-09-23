@@ -32,12 +32,23 @@ const projectPri = () => {
 const clickProject = (name) => {
     const projectInfo = document.getElementById(name);
     projectInfo.addEventListener('click', () => {
+        // Removes existing project name, dueDate, and priority
         const currentTitle = document.getElementsByClassName('currentTitle');
 
+        if (currentTitle.item(0).firstChild != null) {
+            currentTitle.item(0).removeChild(currentTitle.item(0).firstChild);
+        };
+
+        // Adds current project name
         const currentDisplay = document.createElement('p');
         currentDisplay.textContent = name;
 
         currentTitle.item(0).appendChild(currentDisplay);
+
+        const projectDue = document.getElementById('projectDue');
+
+        const dueDisplay = document.createElement('p');
+
     });
 };
 
