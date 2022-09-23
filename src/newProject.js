@@ -1,7 +1,7 @@
-import { generalProject } from './generalProject';
+import {generalProject} from './generalProject';
 
 // Adds new projects to sidebar
-const addProject = (name, projects, currentProject, generalP) => {
+const addProject = (name, projects, currentProject, generalP, projectObject) => {
     // Adds project name
     const projectList = document.getElementsByClassName('projects');
     
@@ -24,6 +24,16 @@ const addProject = (name, projects, currentProject, generalP) => {
     newName.textContent = name;
 
     newAdd.appendChild(newName);
+
+    // Adds project dueDate to sidebar
+    const dueDisplay = document.createElement('p');
+        for (const [key, value] of Object.entries(projectObject)) {
+            if (key === 'dueDate') {
+                dueDisplay.textContent = value;
+            };
+        };
+
+        newAdd.appendChild(dueDisplay);
 
     // Adds project Remove and PriorityChange buttons
     const projectButtons = document.createElement('div');
@@ -74,6 +84,9 @@ const addProject = (name, projects, currentProject, generalP) => {
         generalProject(currentProject, generalP);
         });
     });
+
+    // This section is for priority change functionality
+
 };
 
 // Gets value for radio button selection
