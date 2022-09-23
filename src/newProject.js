@@ -29,14 +29,19 @@ const projectPri = () => {
 };
 
 // Populates content div with current project info
-const clickProject = (name) => {
+const clickProject = (name, projectObject) => {
     const projectInfo = document.getElementById(name);
     projectInfo.addEventListener('click', () => {
         // Removes existing project name, dueDate, and priority
         const currentTitle = document.getElementsByClassName('currentTitle');
+        const projectDue = document.getElementsByClassName('projectDue');
 
         if (currentTitle.item(0).firstChild != null) {
             currentTitle.item(0).removeChild(currentTitle.item(0).firstChild);
+        };
+
+        while (projectDue.item(0).firstChild != null) {
+            projectDue.item(0).removeChild(projectDue.item(0).firstChild);
         };
 
         // Adds current project name
@@ -45,10 +50,15 @@ const clickProject = (name) => {
 
         currentTitle.item(0).appendChild(currentDisplay);
 
-        const projectDue = document.getElementById('projectDue');
-
+        // Adds current project due date
         const dueDisplay = document.createElement('p');
+        for (const [key, value] of Object.entries(projectObject)) {
+            if (key === 'dueDate') {
+                dueDisplay.textContent = value;
+            };
+        };
 
+        projectDue.item(0).appendChild(dueDisplay);
     });
 };
 
