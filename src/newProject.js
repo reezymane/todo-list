@@ -1,11 +1,17 @@
 // Adds new projects to sidebar
 const addProject = (name) => {
+    // Adds project name
     const projectList = document.getElementsByClassName('projects');
     
+    const outerDiv = document.createElement('div');
+    outerDiv.setAttribute('id', name + 'Outer');
+
+    projectList.item(0).appendChild(outerDiv);
+
     const newAdd = document.createElement('div');
     newAdd.setAttribute('id', name);
 
-    projectList.item(0).appendChild(newAdd);
+    outerDiv.appendChild(newAdd);
 
     const span = document.createElement('span');
     span.textContent = '-';
@@ -16,6 +22,24 @@ const addProject = (name) => {
     newName.textContent = name;
 
     newAdd.appendChild(newName);
+
+    // Adds project Remove and PriorityChange buttons
+    const projectButtons = document.createElement('div');
+    projectButtons.setAttribute('id', name + 'Buttons');
+
+    outerDiv.appendChild(projectButtons);
+
+    const projectRemoveButton = document.createElement('button');
+    projectRemoveButton.setAttribute('id', name + 'RemoveButton');
+    projectRemoveButton.textContent = '*trash*';
+
+    projectButtons.appendChild(projectRemoveButton);
+
+    const projectPriorityButton = document.createElement('button');
+    projectPriorityButton.setAttribute('id', name + 'PriorityButton');
+    projectPriorityButton.textContent = '*priority*';
+
+    projectButtons.appendChild(projectPriorityButton);
 };
 
 // Gets value for radio button selection
