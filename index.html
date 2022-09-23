@@ -25,7 +25,10 @@
 
                 <!--Div where new projects will appear-->
                 <div class="projects">
-                    <p id="general"><span>-</span> General</p>
+                    <div id="General">
+                        <span>-</span>
+                        <p>General</p>
+                    </div>
                 </div>
             </div>
 
@@ -49,11 +52,11 @@
                 <div>
                     <p>What priority level is this to-do?</p>
                     <input type="radio" id="high" name="high" value="high">
-                    <label for="high">High</label>
+                    <label for="high">High</label><br>
                     <input type="radio" id="mid" name="mid" value="mid">
-                    <label for="mid">Mid</label>
+                    <label for="mid">Mid</label><br>
                     <input type="radio" id="low" name="low" value="low">
-                    <label for="low">Low</label>
+                    <label for="low">Low</label><br>
                     <input type="radio" id="none" name="none" value="none">
                     <label for="none">None</label>
                 </div>
@@ -71,8 +74,25 @@
             <!--Form to submit a new project-->
             <form id="newProject">
                 <div>
-                    <label for="projectName">Name your new project:</label>
+                    <label for="projectName">New project:</label>
                     <input type="text" id="projectName" name="projectName">
+                </div>
+
+                <div>
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" id="dueDate" name="dueDate">
+                </div>
+
+                <div>
+                    <p>What priority level is this project?</p>
+                    <input type="radio" id="high" name="high" value="high">
+                    <label for="high">High</label><br>
+                    <input type="radio" id="mid" name="mid" value="mid">
+                    <label for="mid">Mid</label><br>
+                    <input type="radio" id="low" name="low" value="low">
+                    <label for="low">Low</label><br>
+                    <input type="radio" id="none" name="none" value="none">
+                    <label for="none">None</label>
                 </div>
 
                 <div>
