@@ -59,6 +59,16 @@ const clickProject = (name, projectObject) => {
         };
 
         projectDue.item(0).appendChild(dueDisplay);
+
+        // Adds current project priority
+        const priorityDisplay = document.createElement('p');
+        for (const [key, value] of Object.entries(projectObject)) {
+            if (key === 'priority') {
+                priorityDisplay.textContent = value;
+            };
+        };
+
+        projectDue.item(0).appendChild(priorityDisplay);
     });
 };
 
