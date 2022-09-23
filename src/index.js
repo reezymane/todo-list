@@ -45,7 +45,7 @@ import {generalProject} from './generalProject';
         
         projects.push(projectObject);
 
-        addProject(document.getElementById('projectName').value);
+        addProject(document.getElementById('projectName').value, projects, currentProject, generalP, projectObject);
 
         clickProject(document.getElementById('projectName').value, projectObject, currentProject);
 
