@@ -2,6 +2,7 @@ import './style.css';
 import {todo, project} from './factories';
 import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
 import {addProject, projectPri, clickProject} from './newProject';
+import {generalProject} from './generalProject';
 
 (() => {
     // Makes new project form appear when new project button is clicked
@@ -10,10 +11,13 @@ import {addProject, projectPri, clickProject} from './newProject';
         openPForm();
     });
 
-    // Creates a General project and an array to hold all projects
+    // Creates a General project object, an array to hold all projects, and sets current project
     const generalP = {name: 'General', list: []};
     const projects = [generalP];
-    let currentProject = 'General';
+    let currentProject;
+
+    // Displays General project info on initial load
+    generalProject(currentProject, generalP);
 
     // Submits a new project object to 'projects' array and displays in sidebar
     const projectSubmit = document.getElementById('projectSubmit');
