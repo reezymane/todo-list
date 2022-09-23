@@ -1,4 +1,5 @@
 import {generalProject} from './generalProject';
+import {openPPCForm, closePPCForm, openTDPCForm, closeTDPCForm} from './functions';
 
 // Adds new projects to sidebar
 const addProject = (name, projects, currentProject, generalP, projectObject) => {
@@ -53,7 +54,7 @@ const addProject = (name, projects, currentProject, generalP, projectObject) => 
 
     projectButtons.appendChild(projectPriorityButton);
 
-    // Deletes project
+    // Deletes project when Remove is clicked
     projectRemoveButton.addEventListener('click', () => {
         // Removes project div from sidebar
         projectList.item(0).removeChild(document.getElementById(name + 'Outer'));
@@ -85,7 +86,10 @@ const addProject = (name, projects, currentProject, generalP, projectObject) => 
         });
     });
 
-    // This section is for priority change functionality
+    // Changes project priority
+    projectPriorityButton.addEventListener('click', () => {
+        openPPCForm();
+    });
 
 };
 
