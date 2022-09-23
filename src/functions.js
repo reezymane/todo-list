@@ -17,4 +17,22 @@ function closeTDForm() {
     document.getElementById('todo').reset();
 };
 
-export {openPForm, closePForm, openTDForm, closeTDForm};
+function openPPCForm() {
+    document.getElementById('projectPriChange').style.display = 'block';
+};
+
+function closePPCForm() {
+    document.getElementById('projectPriChange').style.display = 'none';
+    document.getElementById('projectPriChange').reset();
+};
+
+function openTDPCForm() {
+    document.getElementById('todoPriChange').style.display = 'block';
+};
+
+function closeTDPCForm() {
+    document.getElementById('todoPriChange').style.display = 'none';
+    document.getElementById('todoPriChange').reset();
+};
+
+export {openPForm, closePForm, openTDForm, closeTDForm, openPPCForm, closePPCForm, openTDPCForm, closeTDPCForm};
