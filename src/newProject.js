@@ -1,5 +1,5 @@
 // Adds new projects to sidebar
-const addProject = (name) => {
+const addProject = (name, projects) => {
     // Adds project name
     const projectList = document.getElementsByClassName('projects');
     
@@ -46,7 +46,17 @@ const addProject = (name) => {
         // Removes project div from sidebar
         projectList.item(0).removeChild(document.getElementById(name + 'Outer'));
 
-        
+        // Remove project object
+        let indexCount = 0;
+        projects.forEach((object) => {
+            for (const [key, value] of Object.entries(object)) {
+                if (value === name) {
+                    projects.splice(indexCount, 1)
+                };
+            };
+
+            indexCount++;
+        });
     });
 };
 
