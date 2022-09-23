@@ -28,13 +28,9 @@ const addProject = (name, projects, currentProject, generalP, projectObject) => 
 
     // Adds project dueDate to sidebar
     const dueDisplay = document.createElement('p');
-        for (const [key, value] of Object.entries(projectObject)) {
-            if (key === 'dueDate') {
-                dueDisplay.textContent = value;
-            };
-        };
+    dueDisplay.textContent = projectObject.dueDate;
 
-        newAdd.appendChild(dueDisplay);
+    newAdd.appendChild(dueDisplay);
 
     // Adds project Remove and PriorityChange buttons
     const projectButtons = document.createElement('div');
@@ -90,6 +86,37 @@ const addProject = (name, projects, currentProject, generalP, projectObject) => 
     projectPriorityButton.addEventListener('click', () => {
         openPPCForm();
 
+        // Changes priority in project object
+        const ppcSubmit = document.getElementById('ppcSubmit');
+        ppcSubmit.addEventListener('click', () => {
+            const ppcRadio = document.getElementsByName('ppc');
+            for (let i = 0; i < ppcRadio.length; i++) {
+                if (ppcRadio[i].checked) {
+                        projectObject.priority = ppcRadio[i].value;
+                };
+            };
+
+            const projectDue = document.getElementsByClassName('projectDue');
+            // Removes due date and priority to be re-added with updates
+            while (projectDue.item(0).firstChild != null) {
+                projectDue.item(0).removeChild(projectDue.item(0).firstChild);
+            };
+
+            // Adds current project due date
+            const dueDisplay = document.createElement('p');
+            dueDisplay.textContent = projectObject.dueDate;
+
+            projectDue.item(0).appendChild(dueDisplay);
+
+            // Adds current project priority
+            const priorityDisplay = document.createElement('p');
+            priorityDisplay.textContent = projectObject.priority;
+
+            projectDue.item(0).appendChild(priorityDisplay);
+
+            closePPCForm();
+        });
+
         // Closes priority change form
         const ppcCancel = document.getElementById('ppcCancel');
         ppcCancel.addEventListener('click', () => {
@@ -136,21 +163,13 @@ const clickProject = (name, projectObject, currentProject) => {
 
         // Adds current project due date
         const dueDisplay = document.createElement('p');
-        for (const [key, value] of Object.entries(projectObject)) {
-            if (key === 'dueDate') {
-                dueDisplay.textContent = value;
-            };
-        };
+        dueDisplay.textContent = projectObject.dueDate;
 
         projectDue.item(0).appendChild(dueDisplay);
 
         // Adds current project priority
         const priorityDisplay = document.createElement('p');
-        for (const [key, value] of Object.entries(projectObject)) {
-            if (key === 'priority') {
-                priorityDisplay.textContent = value;
-            };
-        };
+        priorityDisplay.textContent = projectObject.priority;
 
         projectDue.item(0).appendChild(priorityDisplay);
 
