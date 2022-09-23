@@ -34,13 +34,12 @@ const clickProject = (name, projectObject, currentProject) => {
     projectInfo.addEventListener('click', () => {
         // Changes currentProject
         currentProject = name;
-        console.log(currentProject);
 
         // Removes existing project name, dueDate, and priority
         const currentTitle = document.getElementsByClassName('currentTitle');
         const projectDue = document.getElementsByClassName('projectDue');
 
-        if (currentTitle.item(0).firstChild != null) {
+        while (currentTitle.item(0).firstChild != null) {
             currentTitle.item(0).removeChild(currentTitle.item(0).firstChild);
         };
 
