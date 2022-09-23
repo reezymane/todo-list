@@ -13,6 +13,7 @@ import {addProject, projectPri, clickProject} from './newProject';
     // Creates a General project and an array to hold all projects
     const generalP = {name: 'General', list: []};
     const projects = [generalP];
+    let currentProject = 'General';
 
     // Submits a new project object to 'projects' array and displays in sidebar
     const projectSubmit = document.getElementById('projectSubmit');
@@ -25,7 +26,7 @@ import {addProject, projectPri, clickProject} from './newProject';
 
         addProject(document.getElementById('projectName').value);
 
-        clickProject(document.getElementById('projectName').value, projectObject);
+        clickProject(document.getElementById('projectName').value, projectObject, currentProject);
 
         closePForm();
     });
