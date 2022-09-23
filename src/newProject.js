@@ -40,6 +40,14 @@ const addProject = (name) => {
     projectPriorityButton.textContent = '*priority*';
 
     projectButtons.appendChild(projectPriorityButton);
+
+    // Deletes project
+    projectRemoveButton.addEventListener('click', () => {
+        // Removes project div from sidebar
+        projectList.item(0).removeChild(document.getElementById(name + 'Outer'));
+
+        
+    });
 };
 
 // Gets value for radio button selection
