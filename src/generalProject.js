@@ -1,8 +1,9 @@
-// Displays the default general project info
-const generalProject = (currentProject, projectObject) => {
-    // Changes currentProject
-    currentProject = 'General';
+import {generalP, currentProject} from './factories';
 
+// Displays the default general project info
+const generalProject = () => {
+    // Changes currentProject
+    currentProject.name = 'General';
     
     // Adds current project name to contents
     const currentTitle = document.getElementsByClassName('currentTitle');
@@ -16,11 +17,7 @@ const generalProject = (currentProject, projectObject) => {
     const listDiv = document.createElement('div');
     todoList.item(0).appendChild(listDiv);
     
-    for (const [key, value] of Object.entries(projectObject)) {
-        if (key === 'list') {
-            //value.forEach( Add function to display to-do's );
-        };
-    };
+    //generalP.list.forEach( **add function to display current to-do's** );
 };
 
 export {generalProject};

@@ -1,5 +1,5 @@
 import './style.css';
-import {todo, project} from './factories';
+import {todo, project, projects} from './factories';
 import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
 import {addProject, projectPri, clickProject} from './newProject';
 import {generalProject} from './generalProject';
@@ -11,13 +11,8 @@ import {generalProject} from './generalProject';
         openPForm();
     });
 
-    // Creates a General project object, an array to hold all projects, and sets current project
-    const generalP = {name: 'General', list: []};
-    const projects = [generalP];
-    let currentProject;
-
     // Displays General project info on initial load and click
-    generalProject(currentProject, generalP);
+    generalProject();
 
     const generalClick = document.getElementById('General');
     generalClick.addEventListener('click', () => {
@@ -33,21 +28,19 @@ import {generalProject} from './generalProject';
             projectDue.item(0).removeChild(projectDue.item(0).firstChild);
         };
 
-        generalProject(currentProject, generalP);
+        generalProject();
     });
 
     // Submits a new project object to 'projects' array and displays in sidebar
     const projectSubmit = document.getElementById('projectSubmit');
     projectSubmit.addEventListener('click', () => {
-        const projectObject = project(document.getElementById('projectName').value,
+        projects.list.push(project(document.getElementById('projectName').value,
             document.getElementById('projectDueDate').value,
-            projectPri())
-        
-        projects.push(projectObject);
+            projectPri()));
 
-        addProject(document.getElementById('projectName').value, projects, currentProject, generalP, projectObject);
+        addProject(document.getElementById('projectName').value);
 
-        clickProject(document.getElementById('projectName').value, projectObject, currentProject);
+        clickProject(document.getElementById('projectName').value);
 
         closePForm();
     });

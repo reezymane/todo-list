@@ -1,8 +1,9 @@
 import {generalProject} from './generalProject';
 import {openPPCForm, closePPCForm, openTDPCForm, closeTDPCForm} from './functions';
+import {projects, currentProject} from './factories';
 
 // Adds new projects to sidebar
-const addProject = (name, projects, currentProject, generalP, projectObject) => {
+const addProject = (name) => {
     // Adds project name
     const projectList = document.getElementsByClassName('projects');
     
@@ -28,7 +29,12 @@ const addProject = (name, projects, currentProject, generalP, projectObject) => 
 
     // Adds project dueDate to sidebar
     const dueDisplay = document.createElement('p');
-    dueDisplay.textContent = projectObject.dueDate;
+    projects.list.forEach((object) => {
+        if (object.name === name) {
+            dueDisplay.textContent = object.dueDate;
+        };
+    });
+    
 
     newAdd.appendChild(dueDisplay);
 
@@ -57,10 +63,10 @@ const addProject = (name, projects, currentProject, generalP, projectObject) => 
 
         // Remove project object
         let indexCount = 0;
-        projects.forEach((object) => {
+        projects.list.forEach((object) => {
             for (const [key, value] of Object.entries(object)) {
                 if (value === name) {
-                    projects.splice(indexCount, 1)
+                    projects.list.splice(indexCount, 1)
                 };
             };
 
@@ -78,7 +84,7 @@ const addProject = (name, projects, currentProject, generalP, projectObject) => 
             projectDue.item(0).removeChild(projectDue.item(0).firstChild);
         };
 
-        generalProject(currentProject, generalP);
+        generalProject();
         });
     });
 
@@ -92,27 +98,35 @@ const addProject = (name, projects, currentProject, generalP, projectObject) => 
             const ppcRadio = document.getElementsByName('ppc');
             for (let i = 0; i < ppcRadio.length; i++) {
                 if (ppcRadio[i].checked) {
-                        projectObject.priority = ppcRadio[i].value;
+                    projects.list.forEach((object) => {
+                        if (object.name === name) {
+                            object.priority = ppcRadio[i].value;
+                            
+                            if (currentProject.name === name) {
+                                // Removes due date and priority to be re-added with updates
+                                const projectDue = document.getElementsByClassName('projectDue');
+                                while (projectDue.item(0).firstChild != null) {
+                                projectDue.item(0).removeChild(projectDue.item(0).firstChild);
+                                };
+
+                                // Adds current project due date
+                                const dueDisplay = document.createElement('p');
+                                dueDisplay.textContent = object.dueDate;
+
+                                projectDue.item(0).appendChild(dueDisplay);
+
+                                // Adds current project priority
+                                const priorityDisplay = document.createElement('p');
+                                priorityDisplay.textContent = object.priority;
+
+                                projectDue.item(0).appendChild(priorityDisplay);
+                            };
+                        };
+                    });
                 };
             };
 
-            const projectDue = document.getElementsByClassName('projectDue');
-            // Removes due date and priority to be re-added with updates
-            while (projectDue.item(0).firstChild != null) {
-                projectDue.item(0).removeChild(projectDue.item(0).firstChild);
-            };
-
-            // Adds current project due date
-            const dueDisplay = document.createElement('p');
-            dueDisplay.textContent = projectObject.dueDate;
-
-            projectDue.item(0).appendChild(dueDisplay);
-
-            // Adds current project priority
-            const priorityDisplay = document.createElement('p');
-            priorityDisplay.textContent = projectObject.priority;
-
-            projectDue.item(0).appendChild(priorityDisplay);
+            
 
             closePPCForm();
         });
@@ -137,11 +151,11 @@ const projectPri = () => {
 };
 
 // Populates content div with current project info
-const clickProject = (name, projectObject, currentProject) => {
+const clickProject = (name) => {
     const projectInfo = document.getElementById(name);
     projectInfo.addEventListener('click', () => {
         // Changes currentProject
-        currentProject = name;
+        currentProject.name = name;
 
         // Removes existing project name, dueDate, and priority
         const currentTitle = document.getElementsByClassName('currentTitle');
@@ -163,13 +177,22 @@ const clickProject = (name, projectObject, currentProject) => {
 
         // Adds current project due date
         const dueDisplay = document.createElement('p');
-        dueDisplay.textContent = projectObject.dueDate;
+        projects.list.forEach((object) => {
+            if (object.name === name) {
+                dueDisplay.textContent = object.dueDate;
+            };
+        });
 
         projectDue.item(0).appendChild(dueDisplay);
 
         // Adds current project priority
         const priorityDisplay = document.createElement('p');
-        priorityDisplay.textContent = projectObject.priority;
+        projects.list.forEach((object) => {
+            if (object.name === name) {
+                priorityDisplay.textContent = object.priority;
+            };
+        });
+        
 
         projectDue.item(0).appendChild(priorityDisplay);
 
@@ -177,13 +200,14 @@ const clickProject = (name, projectObject, currentProject) => {
         const todoList = document.getElementsByClassName('todoList');
         const listDiv = document.createElement('div');
         todoList.item(0).appendChild(listDiv);
-        
-        for (const [key, value] of Object.entries(projectObject)) {
-            if (key === 'list') {
-                //value.forEach( Add function to display to-do's );
+
+        projects.list.forEach((object) => {
+            if (object.name === name) {
+                //object.list.forEach(() => {
+
+                //});
             };
-        };
-        
+        });
     });
 };
 
