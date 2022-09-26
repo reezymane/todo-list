@@ -1,5 +1,5 @@
 import {todo, projects, currentProject} from './factories';
-import {closeTDForm} from './functions';
+import {closeTDForm, openTDPCForm, closeTDPCForm} from './functions';
 
 // Gets value for to-do radio button selection
 const todoPri = () => {
@@ -105,8 +105,35 @@ const displayTodo = (list) => {
                     todoIndexCount++;
                 });
             };
+        });
+    });
+
+    // Changes to-do priority
+    todoPriorityButton.addEventListener('click', () => {
+        openTDPCForm();
+
+        // Changes priority in to-do object
+        const tdpcSubmit = document.getElementById('tdpcSubmit');
+        tdpcSubmit.addEventListener('click', () => {
+            const tdpcRadio = document.getElementsByName('tdpc');
+            for (let i = 0; i < tdpcRadio.length; i++) {
+                if (tdpcRadio[i].checked) {
+                    projects.list.forEach((parentProject) => {
+                        parentProject.list.forEach((todoItem) => {
+                            if (list.title === todoItem.title) {
+                                todoItem.priority = tdpcRadio[i].value;
+
+                                toPriority.textContent = list.priority;
+                                priorityNotes.appendChild(toPriority);
+                            }
+                        });
+                    });
+                };
+            };
 
             
+
+            closeTDPCForm();
         });
     });
 };
