@@ -1,4 +1,4 @@
-import {todo, projects, currentProject} from './factories';
+import {todo, projects, currentProject, currentTodo} from './factories';
 import {closeTDForm, openTDPCForm, closeTDPCForm} from './functions';
 
 // Gets value for to-do radio button selection
@@ -17,6 +17,10 @@ const displayTodo = (list) => {
     const todoDiv = document.createElement('div');
     todoDiv.setAttribute('id', list.title + 'Div');
     todoList.item(0).appendChild(todoDiv);
+
+    todoDiv.addEventListener('click', () => {
+        currentTodo.name = list.title;
+    });
 
     const todoHeading = document.createElement('div');
     todoHeading.setAttribute('id', list.title + 'Heading');
@@ -111,32 +115,42 @@ const displayTodo = (list) => {
     // Changes to-do priority
     todoPriorityButton.addEventListener('click', () => {
         openTDPCForm();
-
-        // Changes priority in to-do object
-        const tdpcSubmit = document.getElementById('tdpcSubmit');
-        tdpcSubmit.addEventListener('click', () => {
-            const tdpcRadio = document.getElementsByName('tdpc');
-            for (let i = 0; i < tdpcRadio.length; i++) {
-                if (tdpcRadio[i].checked) {
-                    projects.list.forEach((parentProject) => {
-                        parentProject.list.forEach((todoItem) => {
-                            if (list.title === todoItem.title) {
-                                todoItem.priority = tdpcRadio[i].value;
-
-                                toPriority.textContent = list.priority;
-                                priorityNotes.appendChild(toPriority);
-                            }
-                        });
-                    });
-                };
-            };
-
-            
-
-            closeTDPCForm();
-        });
     });
 };
+
+// Changes priority in to-do object
+const tdpcSubmit = document.getElementById('tdpcSubmit');
+tdpcSubmit.addEventListener('click', () => {
+    const tdpcRadio = document.getElementsByName('tdpc');
+
+    for (let i = 0; i < tdpcRadio.length; i++) {
+        if (tdpcRadio[i].checked) {
+            projects.list.forEach((parentProject) => {
+                parentProject.list.forEach((todoItem) => {
+                    if (currentTodo.name === todoItem.title) {
+                        todoItem.priority = tdpcRadio[i].value;
+
+                        let changePriorityNotes = document.getElementById(todoItem.title + 'PriorityNotes');
+                        console.log(changePriorityNotes);
+                        while (changePriorityNotes.firstChild != null) {
+                            changePriorityNotes.removeChild(changePriorityNotes.firstChild); 
+                        };
+
+                        const changePriority = document.createElement('p');
+                        changePriority.textContent = todoItem.priority;
+                        changePriorityNotes.appendChild(changePriority);
+                        
+                        const changeNotes = document.createElement('p');
+                        changeNotes.textContent = todoItem.notes;
+                        changePriorityNotes.appendChild(changeNotes);
+                    };
+                });
+            });
+        };
+    };
+
+    closeTDPCForm();
+});
 
 // Submits a new to-do object to projects.list array
 const submitTodo = () => {
@@ -158,4 +172,4 @@ const submitTodo = () => {
     });
 };
 
-export {submitTodo};
+export {submitTodo, displayTodo};
