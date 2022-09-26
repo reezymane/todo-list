@@ -112,7 +112,7 @@ const displayTodo = (list) => {
         });
     });
 
-    // Changes to-do priority
+    // Opens to-do priority form
     todoPriorityButton.addEventListener('click', () => {
         openTDPCForm();
     });
@@ -137,11 +137,12 @@ tdpcSubmit.addEventListener('click', () => {
                         todoItem.priority = tdpcRadio[i].value;
 
                         let changePriorityNotes = document.getElementById(todoItem.title + 'PriorityNotes');
-                        console.log(changePriorityNotes);
+                        // Removes existing priority text
                         while (changePriorityNotes.firstChild != null) {
                             changePriorityNotes.removeChild(changePriorityNotes.firstChild); 
                         };
 
+                        // Adds updated text
                         const changePriority = document.createElement('p');
                         changePriority.textContent = todoItem.priority;
                         changePriorityNotes.appendChild(changePriority);
