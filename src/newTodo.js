@@ -25,6 +25,7 @@ const displayTodo = (list) => {
     // Adds mark complete button
     const completeButton = document.createElement('button');
     completeButton.setAttribute('id', list.title + 'Complete');
+    completeButton.textContent = '*complete*';
     innerHeading.appendChild(completeButton);
 
     // Adds to-do title
@@ -71,6 +72,21 @@ const displayTodo = (list) => {
     const toNotes = document.createElement('p');
     toNotes.textContent = list.notes;
     priorityNotes.appendChild(toNotes);
+
+    // Adds todo Remove and PriorityChange buttons
+    const todoButtons = document.createElement('div');
+    todoButtons.setAttribute('id', list.title + 'RemovePri');
+    hiddenDiv.appendChild(todoButtons);
+
+    const todoRemoveButton = document.createElement('button');
+    todoRemoveButton.setAttribute('id', list.title + 'RemoveButton');
+    todoRemoveButton.textContent = '*trash*';
+    todoButtons.appendChild(todoRemoveButton);
+
+    const todoPriorityButton = document.createElement('button');
+    todoPriorityButton.setAttribute('id', list.title + 'PriorityButton');
+    todoPriorityButton.textContent = '*priority*';
+    todoButtons.appendChild(todoPriorityButton);
 };
 
 // Submits a new to-do object to projects.list array
