@@ -29,6 +29,13 @@ import {submitTodo} from "./newTodo";
             projectDue.item(0).removeChild(projectDue.item(0).firstChild);
         };
 
+        // Removes existing to-do list
+        const currentTodo = document.getElementsByClassName('todoList');
+
+        while (currentTodo.item(0).firstChild != null) {
+            currentTodo.item(0).removeChild(currentTodo.item(0).firstChild);
+        };
+
         generalProject();
     });
 
