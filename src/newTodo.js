@@ -92,6 +92,22 @@ const displayTodo = (list) => {
     todoRemoveButton.addEventListener('click', () => {
         // Removes todo div from display
         todoList.item(0).removeChild(document.getElementById(list.title + 'Div'));
+        
+        // Remove to-do object
+        let todoIndexCount = 0;
+        projects.list.forEach((parentProject) => {
+            if (currentProject.name === parentProject.name) {
+                parentProject.list.forEach((todoItem) => {
+                    if (list.title === todoItem.title) {
+                        parentProject.list.splice(todoIndexCount, 1);
+                    };
+                    
+                    todoIndexCount++;
+                });
+            };
+
+            
+        });
     });
 };
 
