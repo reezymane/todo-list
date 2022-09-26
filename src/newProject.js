@@ -1,6 +1,7 @@
 import {generalProject} from './generalProject';
 import {openPPCForm, closePPCForm, openTDPCForm, closeTDPCForm} from './functions';
 import {projects, currentProject} from './factories';
+import {displayTodo} from './newTodo';
 
 // Adds new projects to sidebar
 const addProject = (name) => {
@@ -88,57 +89,55 @@ const addProject = (name) => {
         });
     });
 
-    // Changes project priority
+    // Opens project priority form
     projectPriorityButton.addEventListener('click', () => {
         openPPCForm();
+    });
 
-        // Changes priority in project object
-        const ppcSubmit = document.getElementById('ppcSubmit');
-        ppcSubmit.addEventListener('click', () => {
-            const ppcRadio = document.getElementsByName('ppc');
-            for (let i = 0; i < ppcRadio.length; i++) {
-                if (ppcRadio[i].checked) {
-                    projects.list.forEach((object) => {
-                        if (object.name === name) {
-                            object.priority = ppcRadio[i].value;
-                            
-                            if (currentProject.name === name) {
-                                // Removes due date and priority to be re-added with updates
-                                const projectDue = document.getElementsByClassName('projectDue');
-                                while (projectDue.item(0).firstChild != null) {
-                                projectDue.item(0).removeChild(projectDue.item(0).firstChild);
-                                };
-
-                                // Adds current project due date
-                                const dueDisplay = document.createElement('p');
-                                dueDisplay.textContent = object.dueDate;
-
-                                projectDue.item(0).appendChild(dueDisplay);
-
-                                // Adds current project priority
-                                const priorityDisplay = document.createElement('p');
-                                priorityDisplay.textContent = object.priority;
-
-                                projectDue.item(0).appendChild(priorityDisplay);
-                            };
-                        };
-                    });
-                };
-            };
-
-            
-
-            closePPCForm();
-        });
-
-        // Closes priority change form
-        const ppcCancel = document.getElementById('ppcCancel');
-        ppcCancel.addEventListener('click', () => {
-            closePPCForm();
-        });
+    // Closes priority change form
+    const ppcCancel = document.getElementById('ppcCancel');
+    ppcCancel.addEventListener('click', () => {
+        closePPCForm();
     });
 
 };
+
+// Changes priority in project object
+const ppcSubmit = document.getElementById('ppcSubmit');
+ppcSubmit.addEventListener('click', () => {
+    const ppcRadio = document.getElementsByName('ppc');
+    for (let i = 0; i < ppcRadio.length; i++) {
+        if (ppcRadio[i].checked) {
+            projects.list.forEach((object) => {
+                if (object.name === currentProject.name) {
+                    object.priority = ppcRadio[i].value;
+                    
+                    // Removes due date and priority to be re-added with updates
+                    const projectDue = document.getElementsByClassName('projectDue');
+                    while (projectDue.item(0).firstChild != null) {
+                    projectDue.item(0).removeChild(projectDue.item(0).firstChild);
+                    };
+
+                    // Adds current project due date
+                    const dueDisplay = document.createElement('p');
+                    dueDisplay.textContent = object.dueDate;
+
+                    projectDue.item(0).appendChild(dueDisplay);
+
+                    // Adds current project priority
+                    const priorityDisplay = document.createElement('p');
+                    priorityDisplay.textContent = object.priority;
+
+                    projectDue.item(0).appendChild(priorityDisplay);
+                };
+            });
+        };
+    };
+
+    
+
+    closePPCForm();
+});
 
 // Gets value for radio button selection
 const projectPri = () => {
@@ -210,9 +209,9 @@ const clickProject = (name) => {
 
         projects.list.forEach((object) => {
             if (object.name === name) {
-                //object.list.forEach(() => {
-
-                //});
+                object.list.forEach((todoListItem) => {
+                    displayTodo(todoListItem);
+                });
             };
         });
     });
