@@ -14,34 +14,34 @@ const todoPri = () => {
 // Displays to-do
 const displayTodo = (list) => {
     const todoList = document.getElementsByClassName('todoList');
+    const todoDiv = document.createElement('div');
+    todoDiv.setAttribute('id', list.title + 'Div');
+    todoList.item(0).appendChild(todoDiv);
+
     const todoHeading = document.createElement('div');
     todoHeading.setAttribute('id', list.title + 'Heading');
-    todoList.item(0).appendChild(todoHeading);
-
-    const innerHeading = document.createElement('div');
-    innerHeading.setAttribute('id', list.title + 'Inner');
-    todoHeading.appendChild(innerHeading);
+    todoDiv.appendChild(todoHeading);
 
     // Adds mark complete button
     const completeButton = document.createElement('button');
     completeButton.setAttribute('id', list.title + 'Complete');
     completeButton.textContent = '*complete*';
-    innerHeading.appendChild(completeButton);
+    todoHeading.appendChild(completeButton);
 
     // Adds to-do title
     const todoTitle = document.createElement('p');
     todoTitle.textContent = list.title;
-    innerHeading.appendChild(todoTitle);
+    todoHeading.appendChild(todoTitle);
 
     // Adds to-do description
     const todoDescription = document.createElement('p');
     todoDescription.textContent = list.description;
-    innerHeading.appendChild(todoDescription);
+    todoHeading.appendChild(todoDescription);
 
     // Creates div for dueDate display
     const toDueDisplay = document.createElement('div');
     toDueDisplay.setAttribute('id', list.title + 'toDueDisplay');
-    todoList.item(0).appendChild(toDueDisplay);
+    todoDiv.appendChild(toDueDisplay);
 
     // Adds 'Due' text
     const toDueText = document.createElement('p');
@@ -56,7 +56,7 @@ const displayTodo = (list) => {
     // Creates div for priority, notes, and remove/change priority buttons
     const hiddenDiv = document.createElement('div');
     hiddenDiv.setAttribute('id', list.title + 'HiddenDiv');
-    todoList.item(0).appendChild(hiddenDiv);
+    todoDiv.appendChild(hiddenDiv);
 
     // Creates inner div for priority and notes
     const priorityNotes = document.createElement('div');
@@ -87,6 +87,12 @@ const displayTodo = (list) => {
     todoPriorityButton.setAttribute('id', list.title + 'PriorityButton');
     todoPriorityButton.textContent = '*priority*';
     todoButtons.appendChild(todoPriorityButton);
+
+    // Deletes to-do when Remove is clicked
+    todoRemoveButton.addEventListener('click', () => {
+        // Removes todo div from display
+        todoList.item(0).removeChild(document.getElementById(list.title + 'Div'));
+    });
 };
 
 // Submits a new to-do object to projects.list array
