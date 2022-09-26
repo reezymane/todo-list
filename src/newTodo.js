@@ -23,8 +23,6 @@ const submitTodo = () => {
                 document.getElementById('notes').value));
 
                 closeTDForm();
-
-                console.log(object);
             };
         });
     });
