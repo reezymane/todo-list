@@ -3,6 +3,7 @@ import {todo, project, projects} from './factories';
 import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
 import {addProject, projectPri, clickProject} from './newProject';
 import {generalProject} from './generalProject';
+import {submitTodo} from "./newTodo";
 
 (() => {
     // Makes new project form appear when new project button is clicked
@@ -31,7 +32,7 @@ import {generalProject} from './generalProject';
         generalProject();
     });
 
-    // Submits a new project object to 'projects' array and displays in sidebar
+    // Submits a new project object to projects.list array and displays in sidebar
     const projectSubmit = document.getElementById('projectSubmit');
     projectSubmit.addEventListener('click', () => {
         projects.list.push(project(document.getElementById('projectName').value,
@@ -56,6 +57,9 @@ import {generalProject} from './generalProject';
     newTodo.item(0).addEventListener('click', () => {
         openTDForm();
     });
+
+    // Submits a new to-do object to projects.list array
+    submitTodo();
 
     // Cancel button closes to-do form
     const todoCancel = document.getElementById('todoCancel');
