@@ -116,6 +116,12 @@ const displayTodo = (list) => {
     todoPriorityButton.addEventListener('click', () => {
         openTDPCForm();
     });
+
+    // Closes priority change form
+    const tdpcCancel = document.getElementById('tdpcCancel');
+    tdpcCancel.addEventListener('click', () => {
+        closeTDPCForm();
+    });
 };
 
 // Changes priority in to-do object
