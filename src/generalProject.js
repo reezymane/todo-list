@@ -11,11 +11,6 @@ const generalProject = () => {
     currentDisplay.textContent = 'General';
 
     currentTitle.item(0).appendChild(currentDisplay);
-
-    // Displays current project's to-do list
-    const todoList = document.getElementsByClassName('todoList');
-    const listDiv = document.createElement('div');
-    todoList.item(0).appendChild(listDiv);
     
     //generalP.list.forEach( **add function to display current to-do's** );
 };
