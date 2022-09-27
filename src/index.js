@@ -4,6 +4,7 @@ import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
 import {addProject, projectPri, clickProject} from './newProject';
 import {generalProject} from './generalProject';
 import {submitTodo} from "./newTodo";
+import Folder from './img/folder.png'
 
 (() => {
     // Makes new project form appear when new project button is clicked
@@ -11,6 +12,11 @@ import {submitTodo} from "./newTodo";
     newProject.item(0).addEventListener('click', () => {
         openPForm();
     });
+
+    // Adds image to new project button
+    const myFolder = new Image();
+    myFolder.src = Folder;
+    newProject.item(0).appendChild(myFolder);
 
     // Displays General project info on initial load and click
     generalProject();
