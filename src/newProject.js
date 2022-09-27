@@ -2,6 +2,8 @@ import {generalProject} from './generalProject';
 import {openPPCForm, closePPCForm, openTDPCForm, closeTDPCForm} from './functions';
 import {projects, currentProject} from './factories';
 import {displayTodo} from './newTodo';
+import Arrow from './img/arrow.png';
+import Trash from './img/trash.png';
 
 // Adds new projects to sidebar
 const addProject = (name) => {
@@ -47,15 +49,23 @@ const addProject = (name) => {
 
     const projectRemoveButton = document.createElement('button');
     projectRemoveButton.setAttribute('id', name + 'RemoveButton');
-    projectRemoveButton.textContent = '*trash*';
 
     projectButtons.appendChild(projectRemoveButton);
 
+    // Adds image to remove project button
+    const myTrash = new Image();
+    myTrash.src = Trash;
+    projectRemoveButton.appendChild(myTrash);
+
     const projectPriorityButton = document.createElement('button');
     projectPriorityButton.setAttribute('id', name + 'PriorityButton');
-    projectPriorityButton.textContent = '*priority*';
 
     projectButtons.appendChild(projectPriorityButton);
+
+    // Adds image to priority project button
+    const myArrow = new Image();
+    myArrow.src = Arrow;
+    projectPriorityButton.appendChild(myArrow);
 
     // Deletes project when Remove is clicked
     projectRemoveButton.addEventListener('click', () => {
