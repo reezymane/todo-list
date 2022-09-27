@@ -41,9 +41,38 @@ body {
 .sidebar {
     background-color: brown;
 }
-
+ /*Set height and alignment of header*/
 header {
-    background-color: green;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Header background color, border, content alignment, font and padding*/
+header div {
+    background-color: rgba(255, 255, 255, 0.48);
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 30px 50px;
+
+    font-size: 25px;
+}
+
+/*Title styling*/
+header div p:first-child {
+    font-size: 40px;
+
+    text-decoration: underline;
+
+    font-style: italic;
 }
 
 form {
