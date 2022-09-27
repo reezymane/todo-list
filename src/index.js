@@ -3,7 +3,7 @@ import {todo, project, projects, generalP} from './factories';
 import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
 import {addProject, projectPri, clickProject} from './newProject';
 import {generalProject} from './generalProject';
-import {submitTodo, displayTodo} from "./newTodo";
+import {submitTodo} from "./newTodo";
 
 (() => {
     // Makes new project form appear when new project button is clicked
@@ -37,11 +37,6 @@ import {submitTodo, displayTodo} from "./newTodo";
         };
 
         generalProject();
-
-        // Display general project to-do list
-        generalP.list.forEach((generalListItem) => {
-            displayTodo(generalListItem);
-        });
     });
 
     // Submits a new project object to projects.list array and displays in sidebar
