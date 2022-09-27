@@ -38,8 +38,20 @@ const addProject = (name) => {
         };
     });
     
-
     newAdd.appendChild(dueDisplay);
+
+    // Changes project background color based on priority
+    projects.list.forEach((object) => {
+        if (object.name === name) {
+            if (object.priority === 'High') {
+                newName.style.backgroundColor = 'rgb(255, 0, 0, 0.69)';
+            } else if (object.priority === 'Mid') {
+                newName.style.backgroundColor = 'rgb(255,165,0, 0.69)';
+            } else if (object.priority === 'Low') {
+                newName.style.backgroundColor = 'rgb(255, 240, 0, 0.69)';
+            };
+        };
+    });
 
     // Adds project Remove and PriorityChange buttons
     const projectButtons = document.createElement('div');
