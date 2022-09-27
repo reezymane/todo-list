@@ -4,28 +4,32 @@
     padding: 0;
 }
 
-/*Set background image*/
-body {
+/*Set primary background image*/
+.extraBackground {
     background-image: url(./img/brown.jpg);
     background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    max-width: 1920px;
 }
 
-/*Set page direction, width and background border*/
+/*Set page direction, height/width and background border*/
 .pageContainer {
     display: flex;
     flex-direction: column;
 
     font-family: Comic Sans MS, Comic Sans, cursive;
 
-    /*Maximum page width*/
+    height: 1000px;
     max-width: 1920px;
 
     background-image: url(./img/leaf.png);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
 }
 
 .mainContainer {
+    flex: 1;
     display: flex;
 }
 
@@ -40,6 +44,8 @@ body {
 
 .sidebar {
     background-color: brown;
+
+    height: 100%;
 }
  /*Set height and alignment of header*/
 header {
@@ -61,7 +67,7 @@ header div {
     justify-content: center;
     gap: 15px;
 
-    padding: 30px 50px;
+    padding: 30px 100px;
 
     font-size: 25px;
 }
