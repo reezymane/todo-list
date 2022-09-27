@@ -120,6 +120,41 @@ header div p:first-child {
     width: 25px;
 }
 
+.projects {
+    padding-right: 50px;
+}
+
+/*General project alignment*/
+#General {
+    display: flex;
+    gap: 10px;
+
+    border-bottom: 1px solid rgba(99, 99, 99, 0.552);
+
+    padding: 5px 0 10px 0;
+}
+
+/*Aligns project divs*/
+div[id$='Outer'] {
+    display: flex;
+    flex-direction: column;
+
+    border-bottom: 1px solid rgba(99, 99, 99, 0.552);
+    padding: 5px 0 10px 0;
+}
+
+div[id$='Outer'] div:first-child {
+    display: grid;
+    grid-template: min-content min-content / min-content 1fr;
+    column-gap: 10px;
+}
+
+div[id$='Outer'] div:first-child p:last-child {
+    grid-column: 1 / 3;
+
+    font-size: 12px;
+}
+
 form {
     display: none;
 }
