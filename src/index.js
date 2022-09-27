@@ -42,6 +42,12 @@ import Folder from './img/folder.png'
             currentTodo.item(0).removeChild(currentTodo.item(0).firstChild);
         };
 
+        // Hides other project remove and priority buttons
+        const removePri = document.querySelectorAll('[id$=Buttons]');
+        removePri.forEach((node) => {
+            node.style.display = 'none';
+        });
+
         generalProject();
     });
 
