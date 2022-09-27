@@ -231,6 +231,18 @@ const clickProject = (name) => {
                 });
             };
         });
+
+        // Displays remove and priority buttons
+        const removePri = document.querySelectorAll('[id$=Buttons]');
+        removePri.forEach((node) => {
+            const nodeString = node.outerHTML;
+            
+            if (nodeString.includes(currentProject.name + 'Buttons')) {
+                node.style.display = 'flex';
+            } else {
+                node.style.display = 'none';
+            };
+        });
     });
 };
 
