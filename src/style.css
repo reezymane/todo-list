@@ -149,8 +149,12 @@ div[id$='Outer'] div:first-child {
     column-gap: 10px;
 }
 
+div[id$='Outer'] div:first-child span + p {
+    border-radius: 5px;
+}
+
 div[id$='Outer'] div:first-child p:last-child {
-    grid-column: 1 / 3;
+    grid-column-start: 2;
 
     font-size: 12px;
 }
