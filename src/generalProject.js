@@ -1,4 +1,5 @@
 import {generalP, currentProject} from './factories';
+import {displayTodo} from './newTodo';
 
 // Displays the default general project info
 const generalProject = () => {
@@ -12,7 +13,9 @@ const generalProject = () => {
 
     currentTitle.item(0).appendChild(currentDisplay);
     
-    //generalP.list.forEach( **add function to display current to-do's** );
+    generalP.list.forEach((generalTodo) => {
+        displayTodo(generalTodo);
+    });
 };
 
 export {generalProject};
