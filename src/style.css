@@ -11,6 +11,7 @@
     background-size: 100% 100%;
 
     max-width: 1920px;
+    height: 1000px;
 }
 
 /*Set page direction, height/width and background border*/
@@ -20,7 +21,7 @@
 
     font-family: Comic Sans MS, Comic Sans, cursive;
 
-    height: 1000px;
+    height: 100%;
     max-width: 1920px;
 
     background-image: url(./img/leaf.png);
@@ -42,11 +43,20 @@
     flex: 1;
 }
 
+/*Sidebar background, width/height, border and padding*/
 .sidebar {
-    background-color: brown;
+    background-color: rgba(250, 235, 215, 0.691);
 
-    height: 100%;
+    border-radius: 15px;
+
+    height: 80%;
+    width: 250px;
+
+    margin-left: 100px;
+
+    padding: 20px 25px;
 }
+
  /*Set height and alignment of header*/
 header {
     height: 200px;
@@ -57,7 +67,7 @@ header {
 
 /*Header background color, border, content alignment, font and padding*/
 header div {
-    background-color: rgba(255, 255, 255, 0.48);
+    background-color: rgba(250, 235, 215, 0.691);
 
     border-radius: 15px;
 
