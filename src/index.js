@@ -1,5 +1,5 @@
 import './style.css';
-import {todo, project, projects, generalP} from './factories';
+import {project, projects} from './factories';
 import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
 import {addProject, projectPri, clickProject} from './newProject';
 import {generalProject} from './generalProject';
