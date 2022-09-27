@@ -4,9 +4,25 @@
     padding: 0;
 }
 
+/*Set background image*/
+body {
+    background-image: url(./img/brown.jpg);
+    background-repeat: no-repeat;
+}
+
+/*Set page direction, width and background border*/
 .pageContainer {
     display: flex;
     flex-direction: column;
+
+    font-family: Comic Sans MS, Comic Sans, cursive;
+
+    /*Maximum page width*/
+    max-width: 1920px;
+
+    background-image: url(./img/leaf.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .mainContainer {
@@ -16,7 +32,6 @@
 .listContainer {
     display: flex;
     flex-direction: column;
-    background-color: antiquewhite;
 }
 
 .content {
@@ -29,4 +44,8 @@
 
 header {
     background-color: green;
+}
+
+form {
+    display: none;
 }
