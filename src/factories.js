@@ -5,7 +5,7 @@ const todo = (title, description, dueDate, priority, notes) => {
 
 // Stores project name and an array to hold to-do's into an object
 const project = (name, dueDate, priority) => {
-    return {name, dueDate, priority, list: ['todo1', 'todo2', 'todo3']};
+    return {name, dueDate, priority, list: []};
 };
 
 // Creates a General project object, an all projects object, and current project object
@@ -21,4 +21,8 @@ const currentProject = {
     name: 'General'
 };
 
-export {todo, project, generalP, projects, currentProject};
+const currentTodo = {
+    name: ''
+};
+
+export {todo, project, generalP, projects, currentProject, currentTodo};
