@@ -54,7 +54,7 @@
 
     margin-left: 100px;
 
-    padding: 20px 25px;
+    padding: 20px 30px;
 }
 
  /*Set height and alignment of header*/
@@ -89,6 +89,35 @@ header div p:first-child {
     text-decoration: underline;
 
     font-style: italic;
+}
+
+/*Project title size and element spacing*/
+.projectTitle {
+    font-size: 22px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 2px solid rgb(99, 99, 99);
+
+    padding-bottom: 7px;
+}
+
+/*New project button styling*/
+.newProject {
+    border-radius: 20px;
+    border-color: antiquewhite;
+
+    padding: 5px 5px;
+
+    background-color: rgba(127, 193, 251, 0.876);
+}
+
+/*New project button image size*/
+.newProject img {
+    height: 25px;
+    width: 25px;
 }
 
 form {
