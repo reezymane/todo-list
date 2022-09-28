@@ -252,7 +252,31 @@ div[id$='Complete'] {
 
 div[id$='Hidden'] {
     grid-column: 1 / 3;
-    /*display: none;*/
+    display: flex;
+    flex-direction: column;
+}
+
+/*Adds styling to to-do buttons*/
+div[id$='RemovePri'] button {
+    border-radius: 20px;
+    border-color: antiquewhite;
+
+    padding: 2px 2px;
+
+    background-color: rgba(109, 252, 169, 0.69);
+
+    margin-top: 20px;
+}
+
+div[id$='RemovePri'] {
+    align-self: flex-end;
+    display: flex;
+    gap: 10px;
+}
+
+button[id$='Button'] img {
+    height: 20px;
+    width: 20px;
 }
 
 form {
