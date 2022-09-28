@@ -160,6 +160,11 @@ div[id$='Outer'] div:first-child span {
 div[id$='Outer'] div:first-child span + p {
     border-radius: 5px;
     padding: 2px 0 2px 5px;
+    
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 div[id$='Outer'] div:first-child p:last-child {
