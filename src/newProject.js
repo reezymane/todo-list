@@ -26,6 +26,7 @@ const addProject = (name) => {
     newAdd.appendChild(span);
 
     const newName = document.createElement('p');
+    newName.setAttribute('id', name + 'ProjectName');
     newName.textContent = name;
 
     newAdd.appendChild(newName);
@@ -156,8 +157,19 @@ ppcSubmit.addEventListener('click', () => {
                     // Adds current project priority
                     const priorityDisplay = document.createElement('p');
                     priorityDisplay.textContent = object.priority;
+                    
 
                     projectDue.item(0).appendChild(priorityDisplay);
+
+                    // Changes project background color
+                    const projectName = document.getElementById(currentProject.name + 'ProjectName')
+                    if (object.priority === 'High') {
+                        projectName.style.backgroundColor = 'rgb(255, 0, 0, 0.69)';
+                    } else if (object.priority === 'Mid') {
+                        projectName.style.backgroundColor = 'rgb(255,165,0, 0.69)';
+                    } else if (object.priority === 'Low') {
+                        projectName.style.backgroundColor = 'rgb(255, 240, 0, 0.69)';
+                    };
                 };
             });
         };
