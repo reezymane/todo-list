@@ -130,6 +130,10 @@ header div p:first-child {
     padding: 5px 0 10px 0;
 }
 
+#General span {
+    opacity: 0;
+}
+
 #General p {
     padding-left: 5px;
 }
@@ -147,6 +151,10 @@ div[id$='Outer'] div:first-child {
     display: grid;
     grid-template: min-content min-content / min-content 1fr;
     column-gap: 5px;
+}
+
+div[id$='Outer'] div:first-child span {
+    opacity: 0;
 }
 
 div[id$='Outer'] div:first-child span + p {
