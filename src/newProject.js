@@ -252,7 +252,7 @@ const clickProject = (name) => {
             };
         });
 
-        // Project title italics on click
+        // Project title italics and outer div shadow on click
         projects.list.forEach((object) => {
             if (object.name === name) {
                 document.getElementById(object.name).style.fontStyle = 'italic';
@@ -261,6 +261,8 @@ const clickProject = (name) => {
                 if (object.name != 'General') {
                     document.getElementById(object.name).style.fontStyle = 'normal';
                     document.getElementById(object.name + 'Outer').style.boxShadow = 'none';
+                } else {
+                    document.getElementById(object.name).style.boxShadow = 'none';
                 };
             };
         });
