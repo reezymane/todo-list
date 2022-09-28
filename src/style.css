@@ -207,16 +207,21 @@ div[id$='Buttons'] button img {
 /*Bottom border current project div*/
 .currentProject {
     border-bottom: 3px solid black;
-
-    padding-bottom: 5px;
-
+    padding: 0 50px 5px 50px;
     margin-bottom: 40px;
+    display: flex;
 }
 
 .currentTitle {
+    flex: 1;
     font-size: 40px;
+}
 
-    padding: 0 50px;
+.projectDue p + p {
+    padding: 0 15px;
+    width: min-content;
+    border: 2px solid black;
+    border-radius: 15px;
 }
 
 .projects {
