@@ -27,6 +27,7 @@
     background-image: url(./img/leaf.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    position: relative;
 }
 
 .mainContainer {
@@ -231,12 +232,12 @@ div[id$='Buttons'] button img {
 
 /*Styling for new to-do button*/
 .newTodo {
-    border-radius: 20px;
+    border-radius: 25px;
     border-color: antiquewhite;
-    padding: 5px 10px;
+    padding: 5px 15px;
     background-color: rgba(127, 193, 251, 0.876);
     color: white;
-    font-size: 25px;
+    font-size: 35px;
 }
 
 /*Styling for footer*/
@@ -329,7 +330,19 @@ div[id$='PriorityNotes'] p:first-child {
     border: 2px solid black;
     border-radius: 15px;
 }
-
+ /*Styling for forms*/
 form {
     display: none;
+    position: fixed;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, 5%);
+    border: 3px solid #2f2f2f5f;
+    z-index: 9;
+
+    background-color: rgba(245, 242, 220, 0.9);
+    border-radius: 10px;
+
+    flex-direction: column;
+    gap: 10px;
 }
