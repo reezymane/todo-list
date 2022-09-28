@@ -1,5 +1,7 @@
 import {todo, projects, currentProject, currentTodo} from './factories';
 import {closeTDForm, openTDPCForm, closeTDPCForm} from './functions';
+import Arrow from './img/arrow.png';
+import Trash from './img/trash.png';
 
 // Gets value for to-do radio button selection
 const todoPri = () => {
@@ -27,10 +29,14 @@ const displayTodo = (list) => {
     todoDiv.appendChild(todoHeading);
 
     // Adds mark complete button
-    const completeButton = document.createElement('button');
+    const completeButtonContainer = document.createElement('div');
+    completeButtonContainer.setAttribute('id', list.title + 'CompleteContainer');
+    todoHeading.appendChild(completeButtonContainer);
+
+    const completeButton = document.createElement('div');
     completeButton.setAttribute('id', list.title + 'Complete');
-    completeButton.textContent = '*complete*';
-    todoHeading.appendChild(completeButton);
+    completeButton.textContent = 'C';
+    completeButtonContainer.appendChild(completeButton);
 
     // Adds to-do title
     const todoTitle = document.createElement('p');
@@ -59,7 +65,7 @@ const displayTodo = (list) => {
 
     // Creates div for priority, notes, and remove/change priority buttons
     const hiddenDiv = document.createElement('div');
-    hiddenDiv.setAttribute('id', list.title + 'HiddenDiv');
+    hiddenDiv.setAttribute('id', list.title + 'Hidden');
     todoDiv.appendChild(hiddenDiv);
 
     // Creates inner div for priority and notes
@@ -84,13 +90,21 @@ const displayTodo = (list) => {
 
     const todoRemoveButton = document.createElement('button');
     todoRemoveButton.setAttribute('id', list.title + 'RemoveButton');
-    todoRemoveButton.textContent = '*trash*';
     todoButtons.appendChild(todoRemoveButton);
+
+    // Adds image to remove to-do button
+    const myTrash = new Image();
+    myTrash.src = Trash;
+    todoRemoveButton.appendChild(myTrash);
 
     const todoPriorityButton = document.createElement('button');
     todoPriorityButton.setAttribute('id', list.title + 'PriorityButton');
-    todoPriorityButton.textContent = '*priority*';
     todoButtons.appendChild(todoPriorityButton);
+
+    // Adds image to priority to-do button
+    const myArrow = new Image();
+    myArrow.src = Arrow;
+    todoPriorityButton.appendChild(myArrow);
 
     // Deletes to-do when Remove is clicked
     todoRemoveButton.addEventListener('click', () => {
