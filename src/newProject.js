@@ -277,8 +277,6 @@ const clickProject = (name) => {
                     hyphen.style.opacity = 0;
                 };
             };
-            
-            
         });
     });
 };
