@@ -157,6 +157,19 @@ ppcSubmit.addEventListener('click', () => {
                     // Adds current project priority
                     const priorityDisplay = document.createElement('p');
                     priorityDisplay.textContent = object.priority;
+                    if (object.priority === 'High') {
+                        priorityDisplay.style.backgroundColor = 'rgb(255, 0, 0, 0.69)';
+                        priorityDisplay.style.color = 'rgb(255, 255, 255, 0.69)';
+                        priorityDisplay.style.borderColor = 'rgb(255, 255, 255, 0.69)';
+                    } else if (object.priority === 'Mid') {
+                        priorityDisplay.style.backgroundColor = 'rgb(255,165,0, 0.69)';
+                        priorityDisplay.style.color = 'rgb(255, 255, 255, 0.69)';
+                        priorityDisplay.style.borderColor = 'rgb(255, 255, 255, 0.69)';
+                    } else if (object.priority === 'Low') {
+                        priorityDisplay.style.backgroundColor = 'rgb(255, 240, 0, 0.69)';
+                        priorityDisplay.style.color = 'rgb(255, 255, 255, 0.69)';
+                        priorityDisplay.style.borderColor = 'rgb(255, 255, 255, 0.69)';
+                    };
                     
 
                     projectDue.item(0).appendChild(priorityDisplay);
@@ -237,6 +250,19 @@ const clickProject = (name) => {
         projects.list.forEach((object) => {
             if (object.name === name) {
                 priorityDisplay.textContent = object.priority;
+                if (object.priority === 'High') {
+                    priorityDisplay.style.backgroundColor = 'rgb(255, 0, 0, 0.69)';
+                    priorityDisplay.style.color = 'rgb(255, 255, 255, 0.69)';
+                    priorityDisplay.style.borderColor = 'rgb(255, 255, 255, 0.69)';
+                } else if (object.priority === 'Mid') {
+                    priorityDisplay.style.backgroundColor = 'rgb(255,165,0, 0.69)';
+                    priorityDisplay.style.color = 'rgb(255, 255, 255, 0.69)';
+                    priorityDisplay.style.borderColor = 'rgb(255, 255, 255, 0.69)';
+                } else if (object.priority === 'Low') {
+                    priorityDisplay.style.backgroundColor = 'rgb(255, 240, 0, 0.69)';
+                    priorityDisplay.style.color = 'rgb(255, 255, 255, 0.69)';
+                    priorityDisplay.style.borderColor = 'rgb(255, 255, 255, 0.69)';
+                };
             };
         });
         
