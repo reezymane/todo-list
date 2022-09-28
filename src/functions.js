@@ -1,6 +1,6 @@
 // Display and hide forms
 function openPForm() {
-    document.getElementById('newProject').style.display = 'block';
+    document.getElementById('newProject').style.display = 'flex';
 };
 
 function closePForm() {
@@ -9,7 +9,7 @@ function closePForm() {
 };
 
 function openTDForm() {
-    document.getElementById('todo').style.display = 'block';
+    document.getElementById('todo').style.display = 'flex';
 };
 
 function closeTDForm() {
@@ -18,7 +18,7 @@ function closeTDForm() {
 };
 
 function openPPCForm() {
-    document.getElementById('projectPriChange').style.display = 'block';
+    document.getElementById('projectPriChange').style.display = 'flex';
 };
 
 function closePPCForm() {
@@ -27,7 +27,7 @@ function closePPCForm() {
 };
 
 function openTDPCForm() {
-    document.getElementById('todoPriChange').style.display = 'block';
+    document.getElementById('todoPriChange').style.display = 'flex';
 };
 
 function closeTDPCForm() {
