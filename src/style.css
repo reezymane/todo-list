@@ -223,6 +223,32 @@ div[id$='Buttons'] button img {
     flex: 1;
 }
 
+/*Right align new to-do button*/
+.newTodoContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/*Styling for new to-do button*/
+.newTodo {
+    border-radius: 20px;
+    border-color: antiquewhite;
+    padding: 5px 10px;
+    background-color: rgba(127, 193, 251, 0.876);
+    color: white;
+    font-size: 25px;
+}
+
+/*Styling for footer*/
+footer {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ghostwhite;
+    font-size: 20px;
+}
+
 /*Background color and layout of list divs*/
 .todoList div[id$='Div'] {
     background-color: rgba(250, 235, 215, 0.691);
