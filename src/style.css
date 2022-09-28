@@ -120,10 +120,6 @@ header div p:first-child {
     width: 25px;
 }
 
-.projects {
-    padding-right: 35px;
-}
-
 /*General project alignment*/
 #General {
     display: flex;
