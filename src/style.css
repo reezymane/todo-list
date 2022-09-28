@@ -44,8 +44,9 @@
 
 .content {
     flex: 1;
-
     width: 700px;
+    display: flex;
+    flex-direction: column;
 }
 
 /*Sidebar background, width/height, border and padding*/
@@ -219,6 +220,7 @@ div[id$='Buttons'] button img {
 
 .todoList {
     padding: 0 25px;
+    flex: 1;
 }
 
 /*Background color and layout of list divs*/
@@ -241,6 +243,11 @@ div[id$='Heading'] p + p {
     color: rgb(96, 96, 96);
 
     padding-left: 10px;
+}
+
+div[id$='Heading2'] {
+    display: flex;
+    align-items: center;
 }
 
 div[id$='CompleteContainer'] {
