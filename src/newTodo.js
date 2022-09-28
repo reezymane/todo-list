@@ -29,10 +29,23 @@ const displayTodo = (list) => {
     completeButtonContainer.setAttribute('id', list.title + 'CompleteContainer');
     todoHeading2.appendChild(completeButtonContainer);
 
-    const completeButton = document.createElement('div');
+    const completeButton = document.createElement('button');
     completeButton.setAttribute('id', list.title + 'Complete');
     completeButton.textContent = 'C';
     completeButtonContainer.appendChild(completeButton);
+
+    // Turns complete button green on click
+    let completeCount = 0;
+    completeButton.addEventListener('click', () =>{
+        completeButton.style.backgroundColor = 'green';
+        
+        if (completeCount === 1) {
+            completeButton.style.backgroundColor = 'rgba(240, 248, 255, 0)';
+            completeCount = 0;
+        } else {
+            completeCount++;
+        };
+    });
 
     const todoHeading = document.createElement('div');
     todoHeading.setAttribute('id', list.title + 'Heading');
