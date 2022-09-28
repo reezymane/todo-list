@@ -27,6 +27,18 @@ const generalProject = () => {
             document.getElementById(object.name + 'Outer').style.boxShadow = 'none';
         };
     });
+
+    // Displays hyphen on initial load and click
+    const span = document.querySelectorAll('span');
+    span.forEach((hyphen) => {
+        if (hyphen.parentNode != document.querySelector('footer')) {
+            if (hyphen.parentNode === document.getElementById('General')) {
+                hyphen.style.opacity = 1;
+            } else {
+                hyphen.style.opacity = 0;
+            };
+        };
+    });
 };
 
 export {generalProject};
