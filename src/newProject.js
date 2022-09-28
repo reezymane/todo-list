@@ -266,6 +266,20 @@ const clickProject = (name) => {
                 };
             };
         });
+
+        // Displays hyphen on click
+        const span = document.querySelectorAll('span');
+        span.forEach((hyphen) => {
+            if (hyphen.parentNode != document.querySelector('footer')) {
+                if (hyphen.parentNode === document.getElementById(name)) {
+                    hyphen.style.opacity = 1;
+                } else {
+                    hyphen.style.opacity = 0;
+                };
+            };
+            
+            
+        });
     });
 };
 
