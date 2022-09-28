@@ -219,9 +219,35 @@ div[id$='Buttons'] button img {
     padding: 0 50px;
 }
 
+.projects {
+    height: 580px;
+    overflow-y: scroll;
+}
+
 .todoList {
     padding: 0 25px;
-    flex: 1;
+    height: 517px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: scroll;
+}
+
+/*scrollbar width */
+::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+/*scrollbar Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+  
+/*scrollbar Handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(250, 235, 215, 0.641);
+    border-radius: 10px;
 }
 
 /*Right align new to-do button*/
@@ -330,6 +356,11 @@ div[id$='PriorityNotes'] p:first-child {
     border: 2px solid black;
     border-radius: 15px;
 }
+
+div[id$='PriorityNotes'] p + p {
+    overflow-wrap: break-word;
+}
+
  /*Styling for forms*/
 form {
     display: none;
