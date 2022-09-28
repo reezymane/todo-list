@@ -20,23 +20,40 @@ const displayTodo = (list) => {
     todoDiv.setAttribute('id', list.title + 'Div');
     todoList.item(0).appendChild(todoDiv);
 
-    todoDiv.addEventListener('click', () => {
-        currentTodo.name = list.title;
-    });
-
-    const todoHeading = document.createElement('div');
-    todoHeading.setAttribute('id', list.title + 'Heading');
-    todoDiv.appendChild(todoHeading);
+    const todoHeading2 = document.createElement('div');
+    todoHeading2.setAttribute('id', list.title + 'Heading2');
+    todoDiv.appendChild(todoHeading2);
 
     // Adds mark complete button
     const completeButtonContainer = document.createElement('div');
     completeButtonContainer.setAttribute('id', list.title + 'CompleteContainer');
-    todoHeading.appendChild(completeButtonContainer);
+    todoHeading2.appendChild(completeButtonContainer);
 
     const completeButton = document.createElement('div');
     completeButton.setAttribute('id', list.title + 'Complete');
     completeButton.textContent = 'C';
     completeButtonContainer.appendChild(completeButton);
+
+    const todoHeading = document.createElement('div');
+    todoHeading.setAttribute('id', list.title + 'Heading');
+    todoDiv.appendChild(todoHeading);
+    
+    let flexCount = 0;
+    todoHeading.addEventListener('click', () => {
+        currentTodo.name = list.title;
+
+        // Expands to-do on click
+        const hidden = document.getElementById(list.title + 'Hidden');
+        hidden.style.display = 'flex';
+
+        // Collapses to-do on second click
+        if (flexCount === 1) {
+            hidden.style.display = 'none';
+            flexCount = 0;
+        } else {
+            flexCount++;
+        };
+    });
 
     // Adds to-do title
     const todoTitle = document.createElement('p');
