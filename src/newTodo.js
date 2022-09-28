@@ -90,9 +90,19 @@ const displayTodo = (list) => {
     priorityNotes.setAttribute('id', list.title + 'PriorityNotes');
     hiddenDiv.appendChild(priorityNotes);
 
-    // Adds priority
+    // Adds priority and color
     const toPriority = document.createElement('p');
     toPriority.textContent = list.priority;
+    if (list.priority === 'High') {
+        toPriority.style.color = 'rgb(255, 0, 0, 0.69)';
+        toPriority.style.border = '2px solid red';
+    } else if (list.priority === 'Mid') {
+        toPriority.style.color = 'rgb(255,165,0, 0.69)';
+        toPriority.style.border = '2px solid orange';
+    } else if (list.priority === 'Low') {
+        toPriority.style.color = 'rgb(255, 240, 0, 0.69)';
+        toPriority.style.border = '2px solid yellow';
+    };
     priorityNotes.appendChild(toPriority);
 
     // Adds notes
@@ -176,6 +186,16 @@ tdpcSubmit.addEventListener('click', () => {
                         // Adds updated text
                         const changePriority = document.createElement('p');
                         changePriority.textContent = todoItem.priority;
+                        if (todoItem.priority === 'High') {
+                            changePriority.style.color = 'rgb(255, 0, 0, 0.69)';
+                            changePriority.style.border = '2px solid red';
+                        } else if (todoItem.priority === 'Mid') {
+                            changePriority.style.color = 'rgb(255,165,0, 0.69)';
+                            changePriority.style.border = '2px solid orange';
+                        } else if (todoItem.priority === 'Low') {
+                            changePriority.style.color = 'rgb(255, 240, 0, 0.69)';
+                            changePriority.style.border = '2px solid yellow';
+                        };
                         changePriorityNotes.appendChild(changePriority);
                         
                         const changeNotes = document.createElement('p');
