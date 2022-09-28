@@ -202,6 +202,59 @@ div[id$='Buttons'] button img {
     width: 20px;
 }
 
+/*Bottom border current project div*/
+.currentProject {
+    border-bottom: 3px solid black;
+
+    padding-bottom: 5px;
+
+    margin-bottom: 40px;
+}
+
+.currentTitle {
+    font-size: 40px;
+
+    padding: 0 50px;
+}
+
+.todoList {
+    padding: 0 25px;
+}
+
+/*Background color and layout of list divs*/
+.todoList div[id$='Div'] {
+    background-color: rgba(250, 235, 215, 0.691);
+    border-radius: 15px;
+    padding: 15px 25px;
+    display: grid;
+    grid-template: min-content min-content / 1fr 100px;
+}
+
+/*Layout of to-do heading*/
+div[id$='Div'] div[id$='Heading'] {
+    display: grid;
+    grid-template: min-content min-content / min-content 1fr;
+    column-gap: 15px;
+}
+
+div[id$='CompleteContainer'] {
+    grid-row: 1 / 3;
+}
+
+/*Styling of Mark Complete button*/
+div[id$='Complete'] {
+    border: 2px solid antiquewhite;
+    border-radius: 25px;
+    color: rgba(240, 248, 255, 0);
+
+    padding: 5px 10px;
+}
+
+div[id$='Hidden'] {
+    grid-column: 1 / 3;
+    /*display: none;*/
+}
+
 form {
     display: none;
 }
