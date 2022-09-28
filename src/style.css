@@ -37,6 +37,8 @@
 .listContainer {
     display: flex;
     flex-direction: column;
+
+    margin-left: 200px;
 }
 
 .content {
@@ -153,6 +155,7 @@ div[id$='Outer'] div:first-child {
     column-gap: 5px;
 }
 
+/*Hides hyphen next to project names*/
 div[id$='Outer'] div:first-child span {
     opacity: 0;
 }
@@ -161,6 +164,7 @@ div[id$='Outer'] div:first-child span + p {
     border-radius: 5px;
     padding: 2px 0 2px 5px;
     
+    /*Add ellipsis to long titles that overflow*/
     width: 220px;
     white-space: nowrap;
     overflow: hidden;
