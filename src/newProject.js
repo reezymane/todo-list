@@ -256,9 +256,12 @@ const clickProject = (name) => {
         projects.list.forEach((object) => {
             if (object.name === name) {
                 document.getElementById(object.name).style.fontStyle = 'italic';
+                document.getElementById(object.name + 'Outer').style.boxShadow = '0px 5px 5px #888, 0px -5px 5px #888';
             } else {
-                console.log(document.getElementById(object.name));
-                document.getElementById(object.name).style.fontStyle = 'normal';
+                if (object.name != 'General') {
+                    document.getElementById(object.name).style.fontStyle = 'normal';
+                    document.getElementById(object.name + 'Outer').style.boxShadow = 'none';
+                };
             };
         });
     });
