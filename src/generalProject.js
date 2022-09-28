@@ -1,4 +1,4 @@
-import {generalP, currentProject} from './factories';
+import {generalP, currentProject, projects} from './factories';
 import {displayTodo} from './newTodo';
 
 // Displays the default general project info
@@ -15,6 +15,17 @@ const generalProject = () => {
     
     generalP.list.forEach((generalTodo) => {
         displayTodo(generalTodo);
+    });
+
+    // General title italics and outer div shadow on click
+    projects.list.forEach((object) => {
+        if (object.name === 'General') {
+            document.getElementById(object.name).style.fontStyle = 'italic';
+            document.getElementById(object.name).style.boxShadow = '0px 5px 5px #888, 0px -5px 5px #888';
+        } else {
+            document.getElementById(object.name).style.fontStyle = 'normal';
+            document.getElementById(object.name + 'Outer').style.boxShadow = 'none';
+        };
     });
 };
 
