@@ -345,4 +345,22 @@ form {
 
     flex-direction: column;
     gap: 10px;
+    padding: 15px 10px;
+}
+
+/*Style form buttons*/
+form button {
+    border-radius: 20px;
+    border-color: antiquewhite;
+    background-color: rgba(109, 252, 169, 0.69);
+    color: white;
+    font-size: 17px;
+    padding: 5px 10px;
+}
+
+/*Center form buttons*/
+form div:last-child {
+    align-self: center;
+    display: flex;
+    gap: 15px;
 }
