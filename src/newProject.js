@@ -232,10 +232,6 @@ const clickProject = (name) => {
         projectDue.item(0).appendChild(priorityDisplay);
 
         // Displays current project's to-do list
-        const todoList = document.getElementsByClassName('todoList');
-        const listDiv = document.createElement('div');
-        todoList.item(0).appendChild(listDiv);
-
         projects.list.forEach((object) => {
             if (object.name === name) {
                 object.list.forEach((todoListItem) => {
@@ -253,6 +249,16 @@ const clickProject = (name) => {
                 node.style.display = 'flex';
             } else {
                 node.style.display = 'none';
+            };
+        });
+
+        // Project title italics on click
+        projects.list.forEach((object) => {
+            if (object.name === name) {
+                document.getElementById(object.name).style.fontStyle = 'italic';
+            } else {
+                console.log(document.getElementById(object.name));
+                document.getElementById(object.name).style.fontStyle = 'normal';
             };
         });
     });
