@@ -1,6 +1,7 @@
 import {todo, projects, currentProject, currentTodo} from './factories';
 import {closeTDForm, openTDPCForm, closeTDPCForm, openEditTodoForm, closeEditTodoForm, openEditTitleForm,
-    openEditDescriptionForm, openEditDueDateForm, openEditNotesForm, closeEditTitleForm, closeEditDescriptionForm} from './functions';
+    openEditDescriptionForm, openEditDueDateForm, openEditNotesForm, closeEditTitleForm, closeEditDescriptionForm,
+    closeEditDueDateForm} from './functions';
 import Arrow from './img/arrow.png';
 import Trash from './img/trash.png';
 
@@ -250,6 +251,25 @@ document.getElementById('editDescriptionSubmit').addEventListener('click', () =>
 // Closes edit description form
 document.getElementById('editDescriptionCancel').addEventListener('click', () => {
     closeEditDescriptionForm();
+});
+
+// Changes dueDate in to-do object and displays new dueDate
+document.getElementById('editDueDateSubmit').addEventListener('click', () => {
+    projects.list.forEach((parentProject) => {
+        parentProject.list.forEach((todoItem) => {
+            if (currentTodo.name === todoItem.title) {
+                const titleDueDisplay = document.getElementById(todoItem.title + 'toDueDisplay');
+                todoItem.dueDate = document.getElementById('editTodoDueDate').value;
+                titleDueDisplay.lastChild.textContent = todoItem.dueDate;
+                closeEditDueDateForm();
+            };
+        });
+    });
+});
+
+// Closes edit dueDate form
+document.getElementById('editDueDateCancel').addEventListener('click', () => {
+    closeEditDueDateForm();
 });
 
 // Changes priority in to-do object and displays new priority
