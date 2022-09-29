@@ -239,9 +239,9 @@ document.getElementById('editDescriptionSubmit').addEventListener('click', () =>
         parentProject.list.forEach((todoItem) => {
             if (currentTodo.name === todoItem.title) {
                 const titleHeading = document.getElementById(todoItem.title + 'Heading');
-                console.log(titleHeading);
                 todoItem.description = document.getElementById('editTodoDescription').value;
                 titleHeading.lastChild.textContent = todoItem.description;
+                closeEditDescriptionForm();
             };
         });
     });
