@@ -1,6 +1,6 @@
 import {todo, projects, currentProject, currentTodo} from './factories';
 import {closeTDForm, openTDPCForm, closeTDPCForm, openEditTodoForm, closeEditTodoForm, openEditTitleForm,
-    openEditDescriptionForm, openEditDueDateForm, openEditNotesForm} from './functions';
+    openEditDescriptionForm, openEditDueDateForm, openEditNotesForm, closeEditTitleForm} from './functions';
 import Arrow from './img/arrow.png';
 import Trash from './img/trash.png';
 
@@ -201,7 +201,25 @@ document.querySelectorAll('.editProperty').forEach((button) => {
     });
 });
 
-// Changes priority in to-do object
+// Changes title in to-do object and displays new title
+document.getElementById('editTitleSubmit').addEventListener('click', () => {
+    projects.list.forEach((parentProject) => {
+        parentProject.list.forEach((todoItem) => {
+            if (currentTodo.name === todoItem.title) {
+                const titleHeading = document.getElementById(todoItem.title + 'Heading');
+                todoItem.title = document.getElementById('editTodoTitle').value;
+                titleHeading.firstChild.textContent = todoItem.title;
+            };
+        });
+    });
+});
+
+// Closes edit title form
+document.getElementById('editTitleCancel').addEventListener('click', () => {
+    closeEditTitleForm();
+});
+
+// Changes priority in to-do object and displays new priority
 const tdpcSubmit = document.getElementById('tdpcSubmit');
 tdpcSubmit.addEventListener('click', () => {
     const tdpcRadio = document.getElementsByName('tdpc');
