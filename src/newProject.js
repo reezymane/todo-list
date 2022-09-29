@@ -4,6 +4,7 @@ import {projects, currentProject} from './factories';
 import {displayTodo} from './newTodo';
 import Arrow from './img/arrow.png';
 import Trash from './img/trash.png';
+import {format, parseISO} from 'date-fns';
 
 // Adds new projects to sidebar
 const addProject = (name) => {
@@ -35,7 +36,7 @@ const addProject = (name) => {
     const dueDisplay = document.createElement('p');
     projects.list.forEach((object) => {
         if (object.name === name) {
-            dueDisplay.textContent = object.dueDate;
+            dueDisplay.textContent = format(parseISO(object.dueDate), 'MM/dd/yyyy');
         };
     });
     
@@ -150,7 +151,7 @@ ppcSubmit.addEventListener('click', () => {
 
                     // Adds current project due date
                     const dueDisplay = document.createElement('p');
-                    dueDisplay.textContent = object.dueDate;
+                    dueDisplay.textContent = format(parseISO(object.dueDate), 'MM/dd/yyyy');
 
                     projectDue.item(0).appendChild(dueDisplay);
 
@@ -239,7 +240,7 @@ const clickProject = (name) => {
         const dueDisplay = document.createElement('p');
         projects.list.forEach((object) => {
             if (object.name === name) {
-                dueDisplay.textContent = object.dueDate;
+                dueDisplay.textContent = format(parseISO(object.dueDate), 'MM/dd/yyyy');
             };
         });
 

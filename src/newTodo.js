@@ -4,6 +4,7 @@ import {closeTDForm, openTDPCForm, closeTDPCForm, openEditTodoForm, closeEditTod
     closeEditDueDateForm, closeEditNotesForm} from './functions';
 import Arrow from './img/arrow.png';
 import Trash from './img/trash.png';
+import {format, parseISO} from 'date-fns';
 
 // Gets value for to-do radio button selection
 const todoPri = () => {
@@ -92,7 +93,7 @@ const displayTodo = (list) => {
 
     // Adds to-do dueDate
     const toDueDate = document.createElement('p');
-    toDueDate.textContent = list.dueDate;
+    toDueDate.textContent = format(parseISO(list.dueDate), 'MM/dd/yyyy');
     toDueDisplay.appendChild(toDueDate);
 
     // Creates div for priority, notes, and remove/change priority buttons
@@ -264,7 +265,7 @@ document.getElementById('editDueDateSubmit').addEventListener('click', () => {
             if (currentTodo.name === todoItem.title) {
                 const titleDueDisplay = document.getElementById(todoItem.title + 'toDueDisplay');
                 todoItem.dueDate = document.getElementById('editTodoDueDate').value;
-                titleDueDisplay.lastChild.textContent = todoItem.dueDate;
+                titleDueDisplay.lastChild.textContent = format(parseISO(todoItem.dueDate), 'MM/dd/yyyy');
                 closeEditDueDateForm();
             };
         });
