@@ -1,7 +1,7 @@
 import {todo, projects, currentProject, currentTodo} from './factories';
 import {closeTDForm, openTDPCForm, closeTDPCForm, openEditTodoForm, closeEditTodoForm, openEditTitleForm,
     openEditDescriptionForm, openEditDueDateForm, openEditNotesForm, closeEditTitleForm, closeEditDescriptionForm,
-    closeEditDueDateForm} from './functions';
+    closeEditDueDateForm, closeEditNotesForm} from './functions';
 import Arrow from './img/arrow.png';
 import Trash from './img/trash.png';
 
@@ -212,6 +212,8 @@ document.getElementById('editTitleSubmit').addEventListener('click', () => {
                 const titleHeading = document.getElementById(todoItem.title + 'Heading');
                 const titleDueDisplay = document.getElementById(todoItem.title + 'toDueDisplay');
                 const titleHidden = document.getElementById(todoItem.title + 'Hidden');
+                const titlePriorityNotes = document.getElementById(todoItem.title + 'PriorityNotes');
+                const titleRemovePri = document.getElementById(todoItem.title + 'RemovePri');
 
                 todoItem.title = document.getElementById('editTodoTitle').value;
                 titleHeading.firstChild.textContent = todoItem.title;
@@ -221,6 +223,8 @@ document.getElementById('editTitleSubmit').addEventListener('click', () => {
                 titleHeading.setAttribute('id', todoItem.title + 'Heading');
                 titleDueDisplay.setAttribute('id', todoItem.title + 'toDueDisplay');
                 titleHidden.setAttribute('id', todoItem.title + 'Hidden');
+                titlePriorityNotes.setAttribute('id', todoItem.title + 'PriorityNotes');
+                titleRemovePri.setAttribute('id', todoItem.title + 'RemovePri');
                 
                 currentTodo.name = todoItem.title;
                 closeEditTitleForm();
@@ -272,6 +276,25 @@ document.getElementById('editDueDateCancel').addEventListener('click', () => {
     closeEditDueDateForm();
 });
 
+// Changes notes in to-do object and displays new notes
+document.getElementById('editNotesSubmit').addEventListener('click', () => {
+    projects.list.forEach((parentProject) => {
+        parentProject.list.forEach((todoItem) => {
+            if (currentTodo.name === todoItem.title) {
+                const titlePriorityNotes = document.getElementById(todoItem.title + 'PriorityNotes');
+                todoItem.notes = document.getElementById('editTodoNotes').value;
+                titlePriorityNotes.lastChild.textContent = todoItem.notes;
+                closeEditNotesForm();
+            };
+        });
+    });
+});
+
+// Closes edit notes form
+document.getElementById('editNotesCancel').addEventListener('click', () => {
+    closeEditNotesForm();
+});
+
 // Changes priority in to-do object and displays new priority
 const tdpcSubmit = document.getElementById('tdpcSubmit');
 tdpcSubmit.addEventListener('click', () => {
@@ -314,6 +337,11 @@ tdpcSubmit.addEventListener('click', () => {
         };
     };
 
+    closeTDPCForm();
+});
+
+// Closes priority change form
+document.getElementById('tdpcCancel').addEventListener('click', () => {
     closeTDPCForm();
 });
 
