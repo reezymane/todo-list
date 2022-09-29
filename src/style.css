@@ -403,3 +403,13 @@ form div:last-child {
     display: flex;
     gap: 15px;
 }
+
+/*Edit property form*/
+form#editTodo div:first-child {
+    display: flex;
+    flex-direction: column;
+}
+
+form#editTodo div:first-child .editProperty {
+    background-color: rgba(127, 193, 251, 0.876);
+}
