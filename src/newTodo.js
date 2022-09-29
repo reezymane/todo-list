@@ -1,5 +1,5 @@
 import {todo, projects, currentProject, currentTodo} from './factories';
-import {closeTDForm, openTDPCForm, closeTDPCForm} from './functions';
+import {closeTDForm, openTDPCForm, closeTDPCForm, openEditTodoForm, closeEditTodoForm} from './functions';
 import Arrow from './img/arrow.png';
 import Trash from './img/trash.png';
 
@@ -137,14 +137,14 @@ const displayTodo = (list) => {
     myTrash.src = Trash;
     todoRemoveButton.appendChild(myTrash);
 
-    const todoPriorityButton = document.createElement('button');
-    todoPriorityButton.setAttribute('id', list.title + 'PriorityButton');
-    todoButtons.appendChild(todoPriorityButton);
+    const todoEditButton = document.createElement('button');
+    todoEditButton.setAttribute('id', list.title + 'EditButton');
+    todoButtons.appendChild(todoEditButton);
 
     // Adds image to priority to-do button
     const myArrow = new Image();
     myArrow.src = Arrow;
-    todoPriorityButton.appendChild(myArrow);
+    todoEditButton.appendChild(myArrow);
 
     // Deletes to-do when Remove is clicked
     todoRemoveButton.addEventListener('click', () => {
@@ -166,15 +166,15 @@ const displayTodo = (list) => {
         });
     });
 
-    // Opens to-do priority form
-    todoPriorityButton.addEventListener('click', () => {
-        openTDPCForm();
+    // Opens to-do edit form
+    todoEditButton.addEventListener('click', () => {
+        openEditTodoForm();
     });
 
-    // Closes priority change form
-    const tdpcCancel = document.getElementById('tdpcCancel');
-    tdpcCancel.addEventListener('click', () => {
-        closeTDPCForm();
+    // Closes to-do edit form
+    const editTodoCancel = document.getElementById('editTodoCancel');
+    editTodoCancel.addEventListener('click', () => {
+        closeEditTodoForm();
     });
 };
 
