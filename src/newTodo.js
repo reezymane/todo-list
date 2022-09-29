@@ -1,5 +1,6 @@
 import {todo, projects, currentProject, currentTodo} from './factories';
-import {closeTDForm, openTDPCForm, closeTDPCForm, openEditTodoForm, closeEditTodoForm} from './functions';
+import {closeTDForm, openTDPCForm, closeTDPCForm, openEditTodoForm, closeEditTodoForm, openEditTitleForm,
+    openEditDescriptionForm, openEditDueDateForm, openEditNotesForm} from './functions';
 import Arrow from './img/arrow.png';
 import Trash from './img/trash.png';
 
@@ -177,6 +178,28 @@ const displayTodo = (list) => {
         closeEditTodoForm();
     });
 };
+
+// Edit to-do property buttons open appropriate form
+document.querySelectorAll('.editProperty').forEach((button) => {
+    button.addEventListener('click', () => {
+        if (button.textContent === 'Title') {
+            closeEditTodoForm();
+            openEditTitleForm();
+        } else if (button.textContent === 'Description') {
+            closeEditTodoForm();
+            openEditDescriptionForm();
+        } else if (button.textContent === 'Due Date') {
+            closeEditTodoForm();
+            openEditDueDateForm();
+        } else if (button.textContent === 'Priority') {
+            closeEditTodoForm();
+            openTDPCForm();
+        } else if (button.textContent === 'Notes') {
+            closeEditTodoForm();
+            openEditNotesForm();
+        };
+    });
+});
 
 // Changes priority in to-do object
 const tdpcSubmit = document.getElementById('tdpcSubmit');
