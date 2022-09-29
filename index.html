@@ -74,6 +74,62 @@
                 </div>
             </form>
 
+            <!--Edit to-do form-->
+            <form id="editTodo">
+                <div>
+                    <p>Which property would you like to edit?</p>
+                    <button id="editTitle">Title</button>
+                    <button id="editDescription">Description</button>
+                    <button id="editDueDate">Due Date</button>
+                    <button id="editPriority">Priority</button>
+                    <button id="editNotes">Notes</button>
+                </div>
+
+                <div>
+                    <button type="button" id="editTodoSubmit">Submit</button>
+                    <button type="button" id="editTodoCancel">Cancel</button>
+                </div>
+            </form>
+
+            <!--Edit title form-->
+            <form id="editTitleForm">
+                <div>
+                    <label for="editTodoTitle">New title:</label>
+                    <input type="text" id="editTodoTitle" name="editTodoTitle">
+                </div>
+                
+                <div>
+                    <button type="button" id="editTitleSubmit">Submit</button>
+                    <button type="button" id="editTitleCancel">Cancel</button>
+                </div>
+            </form>
+
+            <!--Edit description form-->
+            <form id="editDescriptionForm">
+                <div>
+                    <label for="editTodoDescription">New description:</label>
+                    <input type="text" id="editTodoDescription" name="editTodoDescription">
+                </div>
+                
+                <div>
+                    <button type="button" id="editDescriptionSubmit">Submit</button>
+                    <button type="button" id="editDescriptionCancel">Cancel</button>
+                </div>
+            </form>
+
+            <!--Edit dueDate form-->
+            <form id="editDueDateForm">
+                <div>
+                    <label for="editTodoDueDate">New due date:</label>
+                    <input type="date" id="editTodoDueDate" name="editTodoDueDate">
+                </div>
+                
+                <div>
+                    <button type="button" id="editDueDateSubmit">Submit</button>
+                    <button type="button" id="editDueDateCancel">Cancel</button>
+                </div>
+            </form>
+
             <!--Form to change to-do priority-->
             <form id="todoPriChange">
                 <div>
@@ -91,6 +147,19 @@
                 <div>
                     <button type="button" id="tdpcSubmit">Submit</button>
                     <button type="button" id="tdpcCancel">Cancel</button>
+                </div>
+            </form>
+
+            <!--Edit notes form-->
+            <form id="editNotesForm">
+                <div>
+                    <label for="editTodoNotes">New note:</label>
+                    <textarea name="editTodoNotes" id="editTodoNotes" placeholder="Notes"></textarea>
+                </div>
+                
+                <div>
+                    <button type="button" id="editNotesSubmit">Submit</button>
+                    <button type="button" id="editNotesCancel">Cancel</button>
                 </div>
             </form>
 
