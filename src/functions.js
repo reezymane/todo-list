@@ -35,4 +35,53 @@ function closeTDPCForm() {
     document.getElementById('todoPriChange').reset();
 };
 
-export {openPForm, closePForm, openTDForm, closeTDForm, openPPCForm, closePPCForm, openTDPCForm, closeTDPCForm};
+function openEditTodoForm() {
+    document.getElementById('editTodo').style.display = 'flex';
+};
+
+function closeEditTodoForm() {
+    document.getElementById('editTodo').style.display = 'none';
+    document.getElementById('editTodo').reset();
+};
+
+function openEditTitleForm() {
+    document.getElementById('editTitleForm').style.display = 'flex';
+};
+
+function closeEditTitleForm() {
+    document.getElementById('editTitleForm').style.display = 'none';
+    document.getElementById('editTitleForm').reset();
+};
+
+function openEditDescriptionForm() {
+    document.getElementById('editDescriptionForm').style.display = 'flex';
+};
+
+function closeEditDescriptionForm() {
+    document.getElementById('editDescriptionForm').style.display = 'none';
+    document.getElementById('editDescriptionForm').reset();
+};
+
+function openEditDueDateForm() {
+    document.getElementById('editDueDateForm').style.display = 'flex';
+};
+
+function closeEditDueDateForm() {
+    document.getElementById('editDueDateForm').style.display = 'none';
+    document.getElementById('editDueDateForm').reset();
+};
+
+function openEditNotesForm() {
+    document.getElementById('editNotesForm').style.display = 'flex';
+};
+
+function closeEditNotesForm() {
+    document.getElementById('editNotesForm').style.display = 'none';
+    document.getElementById('editNotesForm').reset();
+};
+
+export {openPForm, closePForm, openTDForm, closeTDForm,
+    openPPCForm, closePPCForm, openTDPCForm, closeTDPCForm,
+    openEditTodoForm, closeEditTodoForm, openEditTitleForm,
+    closeEditTitleForm, openEditDescriptionForm, closeEditDescriptionForm,
+    openEditDueDateForm, closeEditDueDateForm, openEditNotesForm, closeEditNotesForm};
