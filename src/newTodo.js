@@ -1,6 +1,6 @@
 import {todo, projects, currentProject, currentTodo} from './factories';
 import {closeTDForm, openTDPCForm, closeTDPCForm, openEditTodoForm, closeEditTodoForm, openEditTitleForm,
-    openEditDescriptionForm, openEditDueDateForm, openEditNotesForm, closeEditTitleForm} from './functions';
+    openEditDescriptionForm, openEditDueDateForm, openEditNotesForm, closeEditTitleForm, closeEditDescriptionForm} from './functions';
 import Arrow from './img/arrow.png';
 import Trash from './img/trash.png';
 
@@ -201,14 +201,28 @@ document.querySelectorAll('.editProperty').forEach((button) => {
     });
 });
 
-// Changes title in to-do object and displays new title
+// Changes title in to-do object, displays new title, and updates div names
 document.getElementById('editTitleSubmit').addEventListener('click', () => {
     projects.list.forEach((parentProject) => {
         parentProject.list.forEach((todoItem) => {
             if (currentTodo.name === todoItem.title) {
+                const titleDiv = document.getElementById(todoItem.title + 'Div');
+                const titleHeading2 = document.getElementById(todoItem.title + 'Heading2');
                 const titleHeading = document.getElementById(todoItem.title + 'Heading');
+                const titleDueDisplay = document.getElementById(todoItem.title + 'toDueDisplay');
+                const titleHidden = document.getElementById(todoItem.title + 'Hidden');
+
                 todoItem.title = document.getElementById('editTodoTitle').value;
                 titleHeading.firstChild.textContent = todoItem.title;
+
+                titleDiv.setAttribute('id', todoItem.title + 'Div');
+                titleHeading2.setAttribute('id', todoItem.title + 'Heading2');
+                titleHeading.setAttribute('id', todoItem.title + 'Heading');
+                titleDueDisplay.setAttribute('id', todoItem.title + 'toDueDisplay');
+                titleHidden.setAttribute('id', todoItem.title + 'Hidden');
+                
+                currentTodo.name = todoItem.title;
+                closeEditTitleForm();
             };
         });
     });
@@ -217,6 +231,25 @@ document.getElementById('editTitleSubmit').addEventListener('click', () => {
 // Closes edit title form
 document.getElementById('editTitleCancel').addEventListener('click', () => {
     closeEditTitleForm();
+});
+
+// Changes description in to-do object and displays new description
+document.getElementById('editDescriptionSubmit').addEventListener('click', () => {
+    projects.list.forEach((parentProject) => {
+        parentProject.list.forEach((todoItem) => {
+            if (currentTodo.name === todoItem.title) {
+                const titleHeading = document.getElementById(todoItem.title + 'Heading');
+                console.log(titleHeading);
+                todoItem.description = document.getElementById('editTodoDescription').value;
+                titleHeading.lastChild.textContent = todoItem.description;
+            };
+        });
+    });
+});
+
+// Closes edit description form
+document.getElementById('editDescriptionCancel').addEventListener('click', () => {
+    closeEditDescriptionForm();
 });
 
 // Changes priority in to-do object and displays new priority
