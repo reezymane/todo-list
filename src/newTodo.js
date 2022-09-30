@@ -93,7 +93,12 @@ const displayTodo = (list) => {
 
     // Adds to-do dueDate
     const toDueDate = document.createElement('p');
-    toDueDate.textContent = format(parseISO(list.dueDate), 'MM/dd/yyyy');
+    if (list.dueDate != '') {
+        toDueDate.textContent = format(parseISO(list.dueDate), 'MM/dd/yyyy');
+    } else {
+        toDueDate.textContent = list.dueDate;
+    };
+    
     toDueDisplay.appendChild(toDueDate);
 
     // Creates div for priority, notes, and remove/change priority buttons
@@ -265,7 +270,12 @@ document.getElementById('editDueDateSubmit').addEventListener('click', () => {
             if (currentTodo.name === todoItem.title) {
                 const titleDueDisplay = document.getElementById(todoItem.title + 'toDueDisplay');
                 todoItem.dueDate = document.getElementById('editTodoDueDate').value;
-                titleDueDisplay.lastChild.textContent = format(parseISO(todoItem.dueDate), 'MM/dd/yyyy');
+                if (todoItem.dueDate != '') {
+                    titleDueDisplay.lastChild.textContent = format(parseISO(todoItem.dueDate), 'MM/dd/yyyy');
+                } else {
+                    titleDueDisplay.lastChild.textContent = todoItem.dueDate;
+                };
+                
                 closeEditDueDateForm();
             };
         });
@@ -346,11 +356,19 @@ document.getElementById('tdpcCancel').addEventListener('click', () => {
     closeTDPCForm();
 });
 
-// Submits a new to-do object to projects.list array
+// Submits a new to-do object to current project's list array
 const submitTodo = () => {
+    
+
     const todoSubmit = document.getElementById('todoSubmit');
     todoSubmit.addEventListener('click', () => {
-        projects.list.forEach((object) => {
+        // Checks if to-do name already exists
+        const projectToCheck = projects.list.find(object => object.name === currentProject.name);
+        const todoNameExists = projectToCheck.list.find(object => object.title === document.getElementById('todoTitle').value);
+        if (todoNameExists != undefined) {
+            alert('A to-do with this name already exists!');
+        } else {
+            projects.list.forEach((object) => {
             if (currentProject.name === object.name) {
                 object.list.push(todo(document.getElementById('todoTitle').value,
                 document.getElementById('todoDescription').value,
@@ -363,6 +381,9 @@ const submitTodo = () => {
                 closeTDForm();
             };
         });
+        };
+
+        
     });
 };
 
