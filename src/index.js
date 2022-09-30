@@ -1,5 +1,5 @@
 import './style.css';
-import {project, projects} from './factories';
+import {project, projects, projectStorage} from './factories';
 import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
 import {addProject, projectPri, clickProject} from './newProject';
 import {generalProject} from './generalProject';
@@ -54,15 +54,30 @@ import Folder from './img/folder.png'
     // Submits a new project object to projects.list array and displays in sidebar
     const projectSubmit = document.getElementById('projectSubmit');
     projectSubmit.addEventListener('click', () => {
-        projects.list.push(project(document.getElementById('projectName').value,
-            document.getElementById('projectDueDate').value,
-            projectPri()));
+        // Checks if project name already exists
+        const projectNameExists = projects.list.find(object => object.name === document.getElementById('projectName').value);
+        if (projectNameExists != undefined) {
+            alert('A project with this name already exists!');
+        } else {
+            // Checks if project name is blank
+            if (document.getElementById('projectName').value != '') {
+                projects.list.push(project(document.getElementById('projectName').value,
+                document.getElementById('projectDueDate').value,
+                projectPri()));
+                
+                projectStorage(project(document.getElementById('projectName').value,
+                document.getElementById('projectDueDate').value,
+                projectPri()));
 
-        addProject(document.getElementById('projectName').value);
+                addProject(document.getElementById('projectName').value);
 
-        clickProject(document.getElementById('projectName').value);
+                clickProject(document.getElementById('projectName').value);
 
-        closePForm();
+                closePForm();
+            } else {
+                alert('Project name cannot be blank!');
+            };
+        };
     });
 
     // Cancel button closes project form
