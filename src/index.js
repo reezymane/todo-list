@@ -64,8 +64,13 @@ import Folder from './img/folder.png'
                 projects.list.push(project(document.getElementById('projectName').value,
                 document.getElementById('projectDueDate').value,
                 projectPri()));
-                
-                projectStorage(project(document.getElementById('projectName').value,
+
+                // Stores object in local storage
+                Storage.prototype.setObject = function(key, value) {
+                    this.setItem(key, JSON.stringify(value));
+                };
+
+                localStorage.setObject(document.getElementById('projectName').value, project(document.getElementById('projectName').value,
                 document.getElementById('projectDueDate').value,
                 projectPri()));
 
