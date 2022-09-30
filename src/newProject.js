@@ -36,7 +36,11 @@ const addProject = (name) => {
     const dueDisplay = document.createElement('p');
     projects.list.forEach((object) => {
         if (object.name === name) {
-            dueDisplay.textContent = format(parseISO(object.dueDate), 'MM/dd/yyyy');
+            if (object.dueDate != '') {
+                dueDisplay.textContent = format(parseISO(object.dueDate), 'MM/dd/yyyy');
+            } else {
+                dueDisplay.textContent = object.dueDate;
+            };
         };
     });
     
@@ -86,6 +90,11 @@ const addProject = (name) => {
         // Removes project div from sidebar
         projectList.item(0).removeChild(document.getElementById(name + 'Outer'));
 
+        //Remove project from local storage
+        console.log(localStorage);
+        localStorage.removeItem(name);
+        console.log(localStorage);
+        
         // Remove project object
         let indexCount = 0;
         projects.list.forEach((object) => {
@@ -151,7 +160,11 @@ ppcSubmit.addEventListener('click', () => {
 
                     // Adds current project due date
                     const dueDisplay = document.createElement('p');
-                    dueDisplay.textContent = format(parseISO(object.dueDate), 'MM/dd/yyyy');
+                    if (object.dueDate != '') {
+                        dueDisplay.textContent = format(parseISO(object.dueDate), 'MM/dd/yyyy');
+                    } else {
+                        dueDisplay.textContent = object.dueDate;
+                    };
 
                     projectDue.item(0).appendChild(dueDisplay);
 
@@ -240,7 +253,11 @@ const clickProject = (name) => {
         const dueDisplay = document.createElement('p');
         projects.list.forEach((object) => {
             if (object.name === name) {
-                dueDisplay.textContent = format(parseISO(object.dueDate), 'MM/dd/yyyy');
+                if (object.dueDate != '') {
+                    dueDisplay.textContent = format(parseISO(object.dueDate), 'MM/dd/yyyy');
+                } else {
+                    dueDisplay.textContent = object.dueDate;
+                };
             };
         });
 
