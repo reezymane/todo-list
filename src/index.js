@@ -1,58 +1,95 @@
 import './style.css';
-import {project, projects, projectStorage} from './factories';
+import {generalP, project, projects, todo} from './factories';
 import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
 import {addProject, projectPri, clickProject} from './newProject';
 import {generalProject} from './generalProject';
-import {submitTodo} from "./newTodo";
+import {displayTodo, submitTodo} from "./newTodo";
 import Folder from './img/folder.png'
 
 (() => {
     // Load projects from local storage
     if (localStorage.length > 0) {
-        Storage.prototype.getObject = function(key) {
-            var value = this.getItem(key);
-            return value && JSON.parse(value);
-        };
-
         for (let i = 0; i < localStorage.length; i++) {
             const localProject = localStorage.getItem(localStorage.key(i));
             let splitLocal = localProject.replace(/"/g, '');
             let noBrackets = splitLocal.slice(1, -1);
             let stringArray = noBrackets.split(',');
 
-            let localPname;
+            let localName;
+            let localDescription;
             let localDueDate;
             let localPriority;
+            let localNotes;
             let dueDateFilled = 0;
             let priorityFilled = 0;
-            stringArray.forEach((property) => {
-                let propSplit = property.split(':');
-                if (propSplit.includes('name')) {
-                    localPname = propSplit[1];
-                } else if (propSplit.includes('dueDate')) {
-                    localDueDate = propSplit[1];
-                    dueDateFilled++;
-                } else if (propSplit.includes('priority')) {
-                    localPriority = propSplit[1];
-                    priorityFilled++;
+            let descriptionFilled = 0;
+            let notesFilled = 0;
+            const todoTest = /projectHome/g;
+            // Filters local storage for objects without a projectHome i.e. a project
+            if (!stringArray.some(e => todoTest.test(e))) {
+                stringArray.forEach((property) => {
+                    let propSplit = property.split(':');
+                    if (propSplit.includes('name')) {
+                        localName = propSplit[1];
+                    } else if (propSplit.includes('dueDate')) {
+                        localDueDate = propSplit[1];
+                        dueDateFilled++;
+                    } else if (propSplit.includes('priority')) {
+                        localPriority = propSplit[1];
+                        priorityFilled++;
+                    };
+                });
+            
+                if (dueDateFilled === 0) {
+                    projects.list.push(project(localName, '', localPriority));
+                } else if (priorityFilled === 0) {
+                    projects.list.push(project(localName, localDueDate, ''));
+                } else {
+                    projects.list.push(project(localName, localDueDate, localPriority));
                 };
 
-                
-            });
+                addProject(localName);
 
-            if (dueDateFilled === 0) {
-                projects.list.push(project(localPname, '', localPriority));
-            } else if (priorityFilled === 0) {
-                projects.list.push(project(localPname, localDueDate, ''));
+                clickProject(localName);
             } else {
-                projects.list.push(project(localPname, localDueDate, localPriority));
+                // Filters for objects with 'General' as project home
+                if (stringArray[0] === 'projectHome:General') {
+                    stringArray.forEach((property) =>{
+                        let propSplit = property.split(':');
+                        if (propSplit.includes('title')) {
+                            localName = propSplit[1];
+                        } else if (propSplit.includes('description'))  {
+                            localDescription = propSplit[1];
+                            descriptionFilled++;
+                        } else if (propSplit.includes('dueDate'))  {
+                            localDueDate = propSplit[1];
+                            dueDateFilled++;
+                        } else if (propSplit.includes('priority'))  {
+                            localPriority = propSplit[1];
+                            priorityFilled++;
+                        } else if (propSplit.includes('notes'))  {
+                            localNotes = propSplit[1];
+                            notesFilled++;
+                        };
+                    });
+
+                    if (descriptionFilled === 0) {
+                        generalP.list.push(todo('General', localName, '', localDueDate, localPriority, localNotes));
+                    } else if (dueDateFilled === 0) {
+                        generalP.list.push(todo('General', localName, localDescription, '', localPriority, localNotes));
+                    } else if (priorityFilled === 0) {
+                        generalP.list.push(todo('General', localName, localDescription, localDueDate, '', localNotes));
+                    } else if (notesFilled === 0) {
+                        generalP.list.push(todo('General', localName, localDescription, localDueDate, localPriority, ''));
+                    } else {
+                        generalP.list.push(todo('General', localName, localDescription, localDueDate, localPriority, localNotes));
+                    };
+                };
             };
-
-            addProject(localPname);
-
-            clickProject(localPname);
         };
     };
+
+    // Load to-do's from local storage
     
     // Makes new project form appear when new project button is clicked
     const newProject = document.getElementsByClassName('newProject');
