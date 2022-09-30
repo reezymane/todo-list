@@ -1,6 +1,6 @@
 import {generalProject} from './generalProject';
 import {openPPCForm, closePPCForm} from './functions';
-import {projects, currentProject, todo} from './factories';
+import {projects, currentProject, todo, project} from './factories';
 import {displayTodo} from './newTodo';
 import Arrow from './img/arrow.png';
 import Trash from './img/trash.png';
@@ -149,6 +149,18 @@ ppcSubmit.addEventListener('click', () => {
             projects.list.forEach((object) => {
                 if (object.name === currentProject.name) {
                     object.priority = ppcRadio[i].value;
+
+                    // Removes old project entry
+                    localStorage.removeItem(object.name);
+
+                    // Adds updated project to local storage
+                    Storage.prototype.setObject = function(key, value) {
+                        this.setItem(key, JSON.stringify(value));
+                    };
+
+                    localStorage.setObject(object.name, project(object.name,
+                    object.dueDate,
+                    object.priority));
                     
                     // Removes due date and priority to be re-added with updates
                     const projectDue = document.getElementsByClassName('projectDue');
@@ -222,7 +234,6 @@ const clickProject = (name) => {
         // Changes currentProject
         currentProject.name = name;
 
-        console.log(localStorage);
         // Load projects from local storage
         if (localStorage.length > 0) {
             for (let i = 0; i < localStorage.length; i++) {
