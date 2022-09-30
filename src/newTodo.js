@@ -159,6 +159,9 @@ const displayTodo = (list) => {
         // Removes todo div from display
         todoList.item(0).removeChild(document.getElementById(list.title + 'Div'));
         
+        //Remove project from local storage
+        localStorage.removeItem(list.title);
+        
         // Remove to-do object
         let todoIndexCount = 0;
         projects.list.forEach((parentProject) => {
@@ -358,8 +361,6 @@ document.getElementById('tdpcCancel').addEventListener('click', () => {
 
 // Submits a new to-do object to current project's list array
 const submitTodo = () => {
-    
-
     const todoSubmit = document.getElementById('todoSubmit');
     todoSubmit.addEventListener('click', () => {
         // Checks if to-do name already exists
@@ -372,7 +373,18 @@ const submitTodo = () => {
             if (document.getElementById('todoTitle').value != '') {
                 projects.list.forEach((object) => {
                     if (currentProject.name === object.name) {
-                    object.list.push(todo(document.getElementById('todoTitle').value,
+                    object.list.push(todo(object.name, document.getElementById('todoTitle').value,
+                    document.getElementById('todoDescription').value,
+                    document.getElementById('todoDueDate').value,
+                    todoPri(),
+                    document.getElementById('notes').value));
+
+                    // Stores project object in local storage
+                    Storage.prototype.setObject = function(key, value) {
+                        this.setItem(key, JSON.stringify(value));
+                    };
+
+                    localStorage.setObject(document.getElementById('todoTitle').value, todo(object.name, document.getElementById('todoTitle').value,
                     document.getElementById('todoDescription').value,
                     document.getElementById('todoDueDate').value,
                     todoPri(),
@@ -386,10 +398,7 @@ const submitTodo = () => {
             } else {
                 alert('To-do name cannot be blank!');
             };
-            
         };
-
-        
     });
 };
 
