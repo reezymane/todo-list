@@ -65,7 +65,7 @@ import Folder from './img/folder.png'
                 document.getElementById('projectDueDate').value,
                 projectPri()));
 
-                // Stores object in local storage
+                // Stores project object in local storage
                 Storage.prototype.setObject = function(key, value) {
                     this.setItem(key, JSON.stringify(value));
                 };
