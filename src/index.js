@@ -7,6 +7,53 @@ import {submitTodo} from "./newTodo";
 import Folder from './img/folder.png'
 
 (() => {
+    // Load projects from local storage
+    if (localStorage.length > 0) {
+        Storage.prototype.getObject = function(key) {
+            var value = this.getItem(key);
+            return value && JSON.parse(value);
+        };
+
+        for (let i = 0; i < localStorage.length; i++) {
+            const localProject = localStorage.getItem(localStorage.key(i));
+            let splitLocal = localProject.replace(/"/g, '');
+            let noBrackets = splitLocal.slice(1, -1);
+            let stringArray = noBrackets.split(',');
+
+            let localPname;
+            let localDueDate;
+            let localPriority;
+            let dueDateFilled = 0;
+            let priorityFilled = 0;
+            stringArray.forEach((property) => {
+                let propSplit = property.split(':');
+                if (propSplit.includes('name')) {
+                    localPname = propSplit[1];
+                } else if (propSplit.includes('dueDate')) {
+                    localDueDate = propSplit[1];
+                    dueDateFilled++;
+                } else if (propSplit.includes('priority')) {
+                    localPriority = propSplit[1];
+                    priorityFilled++;
+                };
+
+                
+            });
+
+            if (dueDateFilled === 0) {
+                projects.list.push(project(localPname, '', localPriority));
+            } else if (priorityFilled === 0) {
+                projects.list.push(project(localPname, localDueDate, ''));
+            } else {
+                projects.list.push(project(localPname, localDueDate, localPriority));
+            };
+
+            addProject(localPname);
+
+            clickProject(localPname);
+        };
+    };
+    
     // Makes new project form appear when new project button is clicked
     const newProject = document.getElementsByClassName('newProject');
     newProject.item(0).addEventListener('click', () => {
