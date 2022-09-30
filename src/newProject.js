@@ -91,10 +91,8 @@ const addProject = (name) => {
         projectList.item(0).removeChild(document.getElementById(name + 'Outer'));
 
         //Remove project from local storage
-        console.log(localStorage);
         localStorage.removeItem(name);
-        console.log(localStorage);
-        
+
         // Remove project object
         let indexCount = 0;
         projects.list.forEach((object) => {
