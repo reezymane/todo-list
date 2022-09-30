@@ -368,19 +368,25 @@ const submitTodo = () => {
         if (todoNameExists != undefined) {
             alert('A to-do with this name already exists!');
         } else {
-            projects.list.forEach((object) => {
-            if (currentProject.name === object.name) {
-                object.list.push(todo(document.getElementById('todoTitle').value,
-                document.getElementById('todoDescription').value,
-                document.getElementById('todoDueDate').value,
-                todoPri(),
-                document.getElementById('notes').value));
+            // Checks if to-do name is blank
+            if (document.getElementById('todoTitle').value != '') {
+                projects.list.forEach((object) => {
+                    if (currentProject.name === object.name) {
+                    object.list.push(todo(document.getElementById('todoTitle').value,
+                    document.getElementById('todoDescription').value,
+                    document.getElementById('todoDueDate').value,
+                    todoPri(),
+                    document.getElementById('notes').value));
 
-                displayTodo(object.list[(object.list.length - 1)]);
+                    displayTodo(object.list[(object.list.length - 1)]);
 
-                closeTDForm();
+                    closeTDForm();
+                    };
+                });
+            } else {
+                alert('To-do name cannot be blank!');
             };
-        });
+            
         };
 
         
