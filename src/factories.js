@@ -25,4 +25,8 @@ const currentTodo = {
     name: ''
 };
 
-export {todo, project, generalP, projects, currentProject, currentTodo};
+const todoLocalName = {
+    count: 0
+};
+
+export {todo, project, generalP, projects, currentProject, currentTodo, todoLocalName};
