@@ -160,7 +160,80 @@ const displayTodo = (list) => {
         todoList.item(0).removeChild(document.getElementById(list.title + 'Div'));
         
         //Remove to-do from local storage
-        localStorage.removeItem(list.title);
+        todoLocalName.count = 0;
+        if (localStorage.length > 0) {
+            for (let i = 0; i < localStorage.length; i++) {
+                const localProject = localStorage.getItem(localStorage.key(i));
+                let splitLocal = localProject.replace(/"/g, '');
+                let noBrackets = splitLocal.slice(1, -1);
+                let stringArray = noBrackets.split(',');
+                
+                const todoTest = /projectHome/g;
+                // Filters local storage for objects with a projectHome i.e. a to-do
+                if (stringArray.some(e => todoTest.test(e))) {
+                    let projectHome = (stringArray[0].split(':'))[1];
+                    let todoTitle = (stringArray[1].split(':'))[1];
+                    if (projectHome === list.projectHome && todoTitle === list.title) {
+                        // Removes current to-do from local storage
+                        localStorage.removeItem(localStorage.key(i));
+                    } else {
+                        // Renames to-do items left in storage
+                        let localName;
+                        let localDescription;
+                        let localDueDate;
+                        let localPriority;
+                        let localNotes;
+                        let dueDateFilled = 0;
+                        let priorityFilled = 0;
+                        let descriptionFilled = 0;
+                        let notesFilled = 0;
+
+                        stringArray.forEach((property) =>{
+                            let propSplit = property.split(':');
+                            if (propSplit.includes('title')) {
+                                localName = propSplit[1];
+                            } else if (propSplit.includes('description'))  {
+                                localDescription = propSplit[1];
+                                descriptionFilled++;
+                            } else if (propSplit.includes('dueDate'))  {
+                                localDueDate = propSplit[1];
+                                dueDateFilled++;
+                            } else if (propSplit.includes('priority'))  {
+                                localPriority = propSplit[1];
+                                priorityFilled++;
+                            } else if (propSplit.includes('notes'))  {
+                                localNotes = propSplit[1];
+                                notesFilled++;
+                            };
+                        });
+
+                        // Removes current to-do entry from local storage
+                        localStorage.removeItem(localStorage.key(i));
+
+                        // Re-stores to-do object back in local storage, with new key
+                        Storage.prototype.setObject = function(key, value) {
+                            this.setItem(key, JSON.stringify(value));
+                        };
+
+                        if (descriptionFilled === 0) {
+                            localStorage.setObject(todoLocalName.count, todo(projectHome, localName, '', localDueDate, localPriority, localNotes));
+                        } else if (dueDateFilled === 0) {
+                            localStorage.setObject(todoLocalName.count, todo(projectHome, localName, localDescription, '', localPriority, localNotes));
+                        } else if (priorityFilled === 0) {
+                            localStorage.setObject(todoLocalName.count, todo(projectHome, localName, localDescription, localDueDate, '', localNotes));
+                        } else if (notesFilled === 0) {
+                            localStorage.setObject(todoLocalName.count, todo(projectHome, localName, localDescription, localDueDate, localPriority, ''));
+                        } else {
+                            localStorage.setObject(todoLocalName.count, todo(projectHome, localName, localDescription, localDueDate, localPriority, localNotes));
+                        };
+
+                        todoLocalName.count++;
+
+                        console.log(localStorage);
+                    };
+                };
+            };
+        };
         
         
         // Remove to-do object
