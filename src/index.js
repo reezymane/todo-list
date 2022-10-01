@@ -3,7 +3,7 @@ import {generalP, project, projects, todo} from './factories';
 import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
 import {addProject, projectPri, clickProject} from './newProject';
 import {generalProject} from './generalProject';
-import {displayTodo, submitTodo} from "./newTodo";
+import {submitTodo} from "./newTodo";
 import Folder from './img/folder.png'
 
 (() => {
@@ -90,6 +90,64 @@ import Folder from './img/folder.png'
     };
 
     // Load to-do's from local storage
+    if (localStorage.length > 0) {
+        for (let i = 0; i < localStorage.length; i++) {
+            const localProject = localStorage.getItem(localStorage.key(i));
+            let splitLocal = localProject.replace(/"/g, '');
+            let noBrackets = splitLocal.slice(1, -1);
+            let stringArray = noBrackets.split(',');
+
+            let localName;
+            let localDescription;
+            let localDueDate;
+            let localPriority;
+            let localNotes;
+            let dueDateFilled = 0;
+            let priorityFilled = 0;
+            let descriptionFilled = 0;
+            let notesFilled = 0;
+            const todoTest = /projectHome/g;
+
+            // Filters local storage for objects with a projectHome i.e. a to-do
+            if (stringArray.some(e => todoTest.test(e))) {
+                let projectHome = (stringArray[0].split(':'))[1];
+                projects.list.forEach((object) => {
+                   if (object.name != 'General') {
+                    stringArray.forEach((property) =>{
+                        let propSplit = property.split(':');
+                        if (propSplit.includes('title')) {
+                            localName = propSplit[1];
+                        } else if (propSplit.includes('description'))  {
+                            localDescription = propSplit[1];
+                            descriptionFilled++;
+                        } else if (propSplit.includes('dueDate'))  {
+                            localDueDate = propSplit[1];
+                            dueDateFilled++;
+                        } else if (propSplit.includes('priority'))  {
+                            localPriority = propSplit[1];
+                            priorityFilled++;
+                        } else if (propSplit.includes('notes'))  {
+                            localNotes = propSplit[1];
+                            notesFilled++;
+                        };
+                    });
+
+                        if (descriptionFilled === 0) {
+                            object.list.push(todo(projectHome, localName, '', localDueDate, localPriority, localNotes));
+                        } else if (dueDateFilled === 0) {
+                            object.list.push(todo(projectHome, localName, localDescription, '', localPriority, localNotes));
+                        } else if (priorityFilled === 0) {
+                            object.list.push(todo(projectHome, localName, localDescription, localDueDate, '', localNotes));
+                        } else if (notesFilled === 0) {
+                            object.list.push(todo(projectHome, localName, localDescription, localDueDate, localPriority, ''));
+                        } else {
+                            object.list.push(todo(projectHome, localName, localDescription, localDueDate, localPriority, localNotes));
+                        };
+                    }; 
+                });
+            };
+        };
+    };
     
     // Makes new project form appear when new project button is clicked
     const newProject = document.getElementsByClassName('newProject');
