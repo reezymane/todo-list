@@ -1,4 +1,4 @@
-import {todo, projects, currentProject, currentTodo} from './factories';
+import {todo, projects, currentProject, currentTodo, todoLocalName} from './factories';
 import {closeTDForm, openTDPCForm, closeTDPCForm, openEditTodoForm, closeEditTodoForm, openEditTitleForm,
     openEditDescriptionForm, openEditDueDateForm, openEditNotesForm, closeEditTitleForm, closeEditDescriptionForm,
     closeEditDueDateForm, closeEditNotesForm} from './functions';
@@ -159,8 +159,9 @@ const displayTodo = (list) => {
         // Removes todo div from display
         todoList.item(0).removeChild(document.getElementById(list.title + 'Div'));
         
-        //Remove project from local storage
+        //Remove to-do from local storage
         localStorage.removeItem(list.title);
+        
         
         // Remove to-do object
         let todoIndexCount = 0;
@@ -224,6 +225,9 @@ document.getElementById('editTitleSubmit').addEventListener('click', () => {
                 const titlePriorityNotes = document.getElementById(todoItem.title + 'PriorityNotes');
                 const titleRemovePri = document.getElementById(todoItem.title + 'RemovePri');
 
+                // Removes old to-do entry
+                localStorage.removeItem(todoItem.title);
+
                 todoItem.title = document.getElementById('editTodoTitle').value;
                 titleHeading.firstChild.textContent = todoItem.title;
 
@@ -236,6 +240,16 @@ document.getElementById('editTitleSubmit').addEventListener('click', () => {
                 titleRemovePri.setAttribute('id', todoItem.title + 'RemovePri');
                 
                 currentTodo.name = todoItem.title;
+
+                // Adds updated to-do to local storage
+                Storage.prototype.setObject = function(key, value) {
+                    this.setItem(key, JSON.stringify(value));
+                };
+
+                localStorage.setObject(todoItem.title, todo(todoItem.projectHome, todoItem.title,
+                todoItem.description, todoItem.dueDate, todoItem.priority,
+                todoItem.notes));
+
                 closeEditTitleForm();
             };
         });
@@ -255,6 +269,19 @@ document.getElementById('editDescriptionSubmit').addEventListener('click', () =>
                 const titleHeading = document.getElementById(todoItem.title + 'Heading');
                 todoItem.description = document.getElementById('editTodoDescription').value;
                 titleHeading.lastChild.textContent = todoItem.description;
+
+                // Removes old to-do entry
+                localStorage.removeItem(todoItem.title);
+
+                // Adds updated to-do to local storage
+                Storage.prototype.setObject = function(key, value) {
+                    this.setItem(key, JSON.stringify(value));
+                };
+
+                localStorage.setObject(todoItem.title, todo(todoItem.projectHome, todoItem.title,
+                todoItem.description, todoItem.dueDate, todoItem.priority,
+                todoItem.notes));
+
                 closeEditDescriptionForm();
             };
         });
@@ -278,6 +305,18 @@ document.getElementById('editDueDateSubmit').addEventListener('click', () => {
                 } else {
                     titleDueDisplay.lastChild.textContent = todoItem.dueDate;
                 };
+
+                // Removes old to-do entry
+                localStorage.removeItem(todoItem.title);
+
+                // Adds updated to-do to local storage
+                Storage.prototype.setObject = function(key, value) {
+                    this.setItem(key, JSON.stringify(value));
+                };
+
+                localStorage.setObject(todoItem.title, todo(todoItem.projectHome, todoItem.title,
+                todoItem.description, todoItem.dueDate, todoItem.priority,
+                todoItem.notes));
                 
                 closeEditDueDateForm();
             };
@@ -298,6 +337,19 @@ document.getElementById('editNotesSubmit').addEventListener('click', () => {
                 const titlePriorityNotes = document.getElementById(todoItem.title + 'PriorityNotes');
                 todoItem.notes = document.getElementById('editTodoNotes').value;
                 titlePriorityNotes.lastChild.textContent = todoItem.notes;
+
+                // Removes old to-do entry
+                localStorage.removeItem(todoItem.title);
+
+                // Adds updated to-do to local storage
+                Storage.prototype.setObject = function(key, value) {
+                    this.setItem(key, JSON.stringify(value));
+                };
+
+                localStorage.setObject(todoItem.title, todo(todoItem.projectHome, todoItem.title,
+                todoItem.description, todoItem.dueDate, todoItem.priority,
+                todoItem.notes));
+
                 closeEditNotesForm();
             };
         });
@@ -320,6 +372,18 @@ tdpcSubmit.addEventListener('click', () => {
                 parentProject.list.forEach((todoItem) => {
                     if (currentTodo.name === todoItem.title) {
                         todoItem.priority = tdpcRadio[i].value;
+
+                        // Removes old to-do entry
+                        localStorage.removeItem(todoItem.title);
+
+                        // Adds updated to-do to local storage
+                        Storage.prototype.setObject = function(key, value) {
+                            this.setItem(key, JSON.stringify(value));
+                        };
+
+                        localStorage.setObject(todoItem.title, todo(todoItem.projectHome, todoItem.title,
+                        todoItem.description, todoItem.dueDate, todoItem.priority,
+                        todoItem.notes));
 
                         let changePriorityNotes = document.getElementById(todoItem.title + 'PriorityNotes');
                         // Removes existing priority text
@@ -379,18 +443,21 @@ const submitTodo = () => {
                     todoPri(),
                     document.getElementById('notes').value));
 
-                    // Stores project object in local storage
+                    // Stores to-do object in local storage
                     Storage.prototype.setObject = function(key, value) {
                         this.setItem(key, JSON.stringify(value));
                     };
 
-                    localStorage.setObject(document.getElementById('todoTitle').value, todo(object.name, document.getElementById('todoTitle').value,
+                    localStorage.setObject(todoLocalName.count, todo(object.name, document.getElementById('todoTitle').value,
                     document.getElementById('todoDescription').value,
                     document.getElementById('todoDueDate').value,
                     todoPri(),
                     document.getElementById('notes').value));
 
+                    todoLocalName.count++;
+
                     displayTodo(object.list[(object.list.length - 1)]);
+                    
 
                     closeTDForm();
                     };
