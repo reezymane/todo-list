@@ -1,5 +1,5 @@
 import './style.css';
-import {generalP, project, projects, todo} from './factories';
+import {generalP, project, projects, todo, todoLocalName} from './factories';
 import {openPForm, closePForm, openTDForm, closeTDForm} from './functions';
 import {addProject, projectPri, clickProject} from './newProject';
 import {generalProject} from './generalProject';
@@ -24,9 +24,9 @@ import Folder from './img/folder.png'
             let priorityFilled = 0;
             let descriptionFilled = 0;
             let notesFilled = 0;
-            const todoTest = /projectHome/g;
+
             // Filters local storage for objects without a projectHome i.e. a project
-            if (!stringArray.some(e => todoTest.test(e))) {
+            if (!localProject.includes('projectHome')) {
                 stringArray.forEach((property) => {
                     let propSplit = property.split(':');
                     if (propSplit.includes('name')) {
@@ -75,14 +75,19 @@ import Folder from './img/folder.png'
 
                     if (descriptionFilled === 0) {
                         generalP.list.push(todo('General', localName, '', localDueDate, localPriority, localNotes));
+                        todoLocalName.count++;
                     } else if (dueDateFilled === 0) {
                         generalP.list.push(todo('General', localName, localDescription, '', localPriority, localNotes));
+                        todoLocalName.count++;
                     } else if (priorityFilled === 0) {
                         generalP.list.push(todo('General', localName, localDescription, localDueDate, '', localNotes));
+                        todoLocalName.count++;
                     } else if (notesFilled === 0) {
                         generalP.list.push(todo('General', localName, localDescription, localDueDate, localPriority, ''));
+                        todoLocalName.count++;
                     } else {
                         generalP.list.push(todo('General', localName, localDescription, localDueDate, localPriority, localNotes));
+                        todoLocalName.count++;
                     };
                 };
             };
@@ -108,43 +113,50 @@ import Folder from './img/folder.png'
             let notesFilled = 0;
             const todoTest = /projectHome/g;
 
+            
             // Filters local storage for objects with a projectHome i.e. a to-do
-            if (stringArray.some(e => todoTest.test(e))) {
-                let projectHome = (stringArray[0].split(':'))[1];
+            if (localProject.includes('projectHome')) {
                 projects.list.forEach((object) => {
-                   if (object.name != 'General') {
-                    stringArray.forEach((property) =>{
-                        let propSplit = property.split(':');
-                        if (propSplit.includes('title')) {
-                            localName = propSplit[1];
-                        } else if (propSplit.includes('description'))  {
-                            localDescription = propSplit[1];
-                            descriptionFilled++;
-                        } else if (propSplit.includes('dueDate'))  {
-                            localDueDate = propSplit[1];
-                            dueDateFilled++;
-                        } else if (propSplit.includes('priority'))  {
-                            localPriority = propSplit[1];
-                            priorityFilled++;
-                        } else if (propSplit.includes('notes'))  {
-                            localNotes = propSplit[1];
-                            notesFilled++;
-                        };
-                    });
+                    if (stringArray[0] === ('projectHome:' + object.name) && stringArray[0] != 'projectHome:General') {
+                        let projectHome = object.name;
+                        stringArray.forEach((property) =>{
+                            let propSplit = property.split(':');
+                            if (propSplit.includes('title')) {
+                                localName = propSplit[1];
+                            } else if (propSplit.includes('description'))  {
+                                localDescription = propSplit[1];
+                                descriptionFilled++;
+                            } else if (propSplit.includes('dueDate'))  {
+                                localDueDate = propSplit[1];
+                                dueDateFilled++;
+                            } else if (propSplit.includes('priority'))  {
+                                localPriority = propSplit[1];
+                                priorityFilled++;
+                            } else if (propSplit.includes('notes'))  {
+                                localNotes = propSplit[1];
+                                notesFilled++;
+                            };
+                        });
 
                         if (descriptionFilled === 0) {
                             object.list.push(todo(projectHome, localName, '', localDueDate, localPriority, localNotes));
+                            todoLocalName.count++;
                         } else if (dueDateFilled === 0) {
                             object.list.push(todo(projectHome, localName, localDescription, '', localPriority, localNotes));
+                            todoLocalName.count++;
                         } else if (priorityFilled === 0) {
                             object.list.push(todo(projectHome, localName, localDescription, localDueDate, '', localNotes));
+                            todoLocalName.count++;
                         } else if (notesFilled === 0) {
                             object.list.push(todo(projectHome, localName, localDescription, localDueDate, localPriority, ''));
+                            todoLocalName.count++;
                         } else {
                             object.list.push(todo(projectHome, localName, localDescription, localDueDate, localPriority, localNotes));
+                            todoLocalName.count++;
                         };
-                    }; 
+                }; 
                 });
+                
             };
         };
     };
