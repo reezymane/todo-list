@@ -296,7 +296,25 @@ document.getElementById('editTitleSubmit').addEventListener('click', () => {
                 const titleRemovePri = document.getElementById(todoItem.title + 'RemovePri');
 
                 // Removes old to-do entry
-                localStorage.removeItem(todoItem.title);
+                let key; 
+                if (localStorage.length > 0) {
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const localProject = localStorage.getItem(localStorage.key(i));
+                        let splitLocal = localProject.replace(/"/g, '');
+                        let noBrackets = splitLocal.slice(1, -1);
+                        let stringArray = noBrackets.split(',');
+                        
+                        // Filters local storage for objects with a projectHome i.e. a to-do
+                        if (localProject.includes('projectHome')) {
+                            let projectHome = (stringArray[0].split(':'))[1];
+                            let todoTitle = (stringArray[1].split(':'))[1];
+                            if (projectHome === todoItem.projectHome && todoTitle === todoItem.title) {
+                                key = localStorage.key(i);
+                                localStorage.removeItem(localStorage.key(i));
+                            };
+                        };
+                    };
+                };
 
                 todoItem.title = document.getElementById('editTodoTitle').value;
                 titleHeading.firstChild.textContent = todoItem.title;
@@ -316,7 +334,7 @@ document.getElementById('editTitleSubmit').addEventListener('click', () => {
                     this.setItem(key, JSON.stringify(value));
                 };
 
-                localStorage.setObject(todoItem.title, todo(todoItem.projectHome, todoItem.title,
+                localStorage.setObject(key, todo(todoItem.projectHome, todoItem.title,
                 todoItem.description, todoItem.dueDate, todoItem.priority,
                 todoItem.notes));
 
@@ -341,14 +359,32 @@ document.getElementById('editDescriptionSubmit').addEventListener('click', () =>
                 titleHeading.lastChild.textContent = todoItem.description;
 
                 // Removes old to-do entry
-                localStorage.removeItem(todoItem.title);
+                let key; 
+                if (localStorage.length > 0) {
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const localProject = localStorage.getItem(localStorage.key(i));
+                        let splitLocal = localProject.replace(/"/g, '');
+                        let noBrackets = splitLocal.slice(1, -1);
+                        let stringArray = noBrackets.split(',');
+                        
+                        // Filters local storage for objects with a projectHome i.e. a to-do
+                        if (localProject.includes('projectHome')) {
+                            let projectHome = (stringArray[0].split(':'))[1];
+                            let todoTitle = (stringArray[1].split(':'))[1];
+                            if (projectHome === todoItem.projectHome && todoTitle === todoItem.title) {
+                                key = localStorage.key(i);
+                                localStorage.removeItem(localStorage.key(i));
+                            };
+                        };
+                    };
+                };
 
                 // Adds updated to-do to local storage
                 Storage.prototype.setObject = function(key, value) {
                     this.setItem(key, JSON.stringify(value));
                 };
 
-                localStorage.setObject(todoItem.title, todo(todoItem.projectHome, todoItem.title,
+                localStorage.setObject(key, todo(todoItem.projectHome, todoItem.title,
                 todoItem.description, todoItem.dueDate, todoItem.priority,
                 todoItem.notes));
 
@@ -377,14 +413,32 @@ document.getElementById('editDueDateSubmit').addEventListener('click', () => {
                 };
 
                 // Removes old to-do entry
-                localStorage.removeItem(todoItem.title);
+                let key; 
+                if (localStorage.length > 0) {
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const localProject = localStorage.getItem(localStorage.key(i));
+                        let splitLocal = localProject.replace(/"/g, '');
+                        let noBrackets = splitLocal.slice(1, -1);
+                        let stringArray = noBrackets.split(',');
+                        
+                        // Filters local storage for objects with a projectHome i.e. a to-do
+                        if (localProject.includes('projectHome')) {
+                            let projectHome = (stringArray[0].split(':'))[1];
+                            let todoTitle = (stringArray[1].split(':'))[1];
+                            if (projectHome === todoItem.projectHome && todoTitle === todoItem.title) {
+                                key = localStorage.key(i);
+                                localStorage.removeItem(localStorage.key(i));
+                            };
+                        };
+                    };
+                };
 
                 // Adds updated to-do to local storage
                 Storage.prototype.setObject = function(key, value) {
                     this.setItem(key, JSON.stringify(value));
                 };
 
-                localStorage.setObject(todoItem.title, todo(todoItem.projectHome, todoItem.title,
+                localStorage.setObject(key, todo(todoItem.projectHome, todoItem.title,
                 todoItem.description, todoItem.dueDate, todoItem.priority,
                 todoItem.notes));
                 
@@ -409,17 +463,35 @@ document.getElementById('editNotesSubmit').addEventListener('click', () => {
                 titlePriorityNotes.lastChild.textContent = todoItem.notes;
 
                 // Removes old to-do entry
-                localStorage.removeItem(todoItem.title);
+                let key; 
+                if (localStorage.length > 0) {
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const localProject = localStorage.getItem(localStorage.key(i));
+                        let splitLocal = localProject.replace(/"/g, '');
+                        let noBrackets = splitLocal.slice(1, -1);
+                        let stringArray = noBrackets.split(',');
+                        
+                        // Filters local storage for objects with a projectHome i.e. a to-do
+                        if (localProject.includes('projectHome')) {
+                            let projectHome = (stringArray[0].split(':'))[1];
+                            let todoTitle = (stringArray[1].split(':'))[1];
+                            if (projectHome === todoItem.projectHome && todoTitle === todoItem.title) {
+                                key = localStorage.key(i);
+                                localStorage.removeItem(localStorage.key(i));
+                            };
+                        };
+                    };
+                };
 
                 // Adds updated to-do to local storage
                 Storage.prototype.setObject = function(key, value) {
                     this.setItem(key, JSON.stringify(value));
                 };
 
-                localStorage.setObject(todoItem.title, todo(todoItem.projectHome, todoItem.title,
+                localStorage.setObject(key, todo(todoItem.projectHome, todoItem.title,
                 todoItem.description, todoItem.dueDate, todoItem.priority,
                 todoItem.notes));
-
+                
                 closeEditNotesForm();
             };
         });
@@ -444,17 +516,35 @@ tdpcSubmit.addEventListener('click', () => {
                         todoItem.priority = tdpcRadio[i].value;
 
                         // Removes old to-do entry
-                        localStorage.removeItem(todoItem.title);
+                        let key; 
+                        if (localStorage.length > 0) {
+                            for (let i = 0; i < localStorage.length; i++) {
+                                const localProject = localStorage.getItem(localStorage.key(i));
+                                let splitLocal = localProject.replace(/"/g, '');
+                                let noBrackets = splitLocal.slice(1, -1);
+                                let stringArray = noBrackets.split(',');
+                        
+                                // Filters local storage for objects with a projectHome i.e. a to-do
+                                if (localProject.includes('projectHome')) {
+                                    let projectHome = (stringArray[0].split(':'))[1];
+                                    let todoTitle = (stringArray[1].split(':'))[1];
+                                    if (projectHome === todoItem.projectHome && todoTitle === todoItem.title) {
+                                        key = localStorage.key(i);
+                                        localStorage.removeItem(localStorage.key(i));
+                                    };
+                                };
+                            };
+                        };
 
                         // Adds updated to-do to local storage
                         Storage.prototype.setObject = function(key, value) {
                             this.setItem(key, JSON.stringify(value));
                         };
 
-                        localStorage.setObject(todoItem.title, todo(todoItem.projectHome, todoItem.title,
+                        localStorage.setObject(key, todo(todoItem.projectHome, todoItem.title,
                         todoItem.description, todoItem.dueDate, todoItem.priority,
                         todoItem.notes));
-
+                        
                         let changePriorityNotes = document.getElementById(todoItem.title + 'PriorityNotes');
                         // Removes existing priority text
                         while (changePriorityNotes.firstChild != null) {
