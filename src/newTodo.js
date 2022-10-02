@@ -168,9 +168,8 @@ const displayTodo = (list) => {
                 let noBrackets = splitLocal.slice(1, -1);
                 let stringArray = noBrackets.split(',');
                 
-                const todoTest = /projectHome/g;
                 // Filters local storage for objects with a projectHome i.e. a to-do
-                if (stringArray.some(e => todoTest.test(e))) {
+                if (localProject.includes('projectHome')) {
                     let projectHome = (stringArray[0].split(':'))[1];
                     let todoTitle = (stringArray[1].split(':'))[1];
                     if (projectHome === list.projectHome && todoTitle === list.title) {
@@ -228,8 +227,6 @@ const displayTodo = (list) => {
                         };
 
                         todoLocalName.count++;
-
-                        console.log(localStorage);
                     };
                 };
             };

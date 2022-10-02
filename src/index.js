@@ -111,7 +111,6 @@ import Folder from './img/folder.png'
             let priorityFilled = 0;
             let descriptionFilled = 0;
             let notesFilled = 0;
-            const todoTest = /projectHome/g;
 
             
             // Filters local storage for objects with a projectHome i.e. a to-do
