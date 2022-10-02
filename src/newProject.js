@@ -1,6 +1,6 @@
 import {generalProject} from './generalProject';
 import {openPPCForm, closePPCForm} from './functions';
-import {projects, currentProject, todo, project} from './factories';
+import {projects, currentProject, todo, project, todoLocalName} from './factories';
 import {displayTodo} from './newTodo';
 import Arrow from './img/arrow.png';
 import Trash from './img/trash.png';
@@ -92,6 +92,78 @@ const addProject = (name) => {
 
         //Remove project from local storage
         localStorage.removeItem(name);
+
+        // Removes project to-do's from local storage
+        todoLocalName.count = 0;
+        if (localStorage.length > 0) {
+            for (let i = 0; i < localStorage.length; i++) {
+                const localProject = localStorage.getItem(localStorage.key(i));
+                let splitLocal = localProject.replace(/"/g, '');
+                let noBrackets = splitLocal.slice(1, -1);
+                let stringArray = noBrackets.split(',');
+
+                // Filters local storage for objects with a projectHome i.e. a to-do
+                if (localProject.includes('projectHome')) {
+                    let projectHome = (stringArray[0].split(':'))[1];
+                    if (projectHome === name) {
+                        // Removes to-do's from local storage
+                        localStorage.removeItem(localStorage.key(i));
+                    } else {
+                        // Renames to-do items left in storage
+                        let localName;
+                        let localDescription;
+                        let localDueDate;
+                        let localPriority;
+                        let localNotes;
+                        let dueDateFilled = 0;
+                        let priorityFilled = 0;
+                        let descriptionFilled = 0;
+                        let notesFilled = 0;
+
+                        stringArray.forEach((property) =>{
+                            let propSplit = property.split(':');
+                            if (propSplit.includes('title')) {
+                                localName = propSplit[1];
+                            } else if (propSplit.includes('description'))  {
+                                localDescription = propSplit[1];
+                                descriptionFilled++;
+                            } else if (propSplit.includes('dueDate'))  {
+                                localDueDate = propSplit[1];
+                                dueDateFilled++;
+                            } else if (propSplit.includes('priority'))  {
+                                localPriority = propSplit[1];
+                                priorityFilled++;
+                            } else if (propSplit.includes('notes'))  {
+                                localNotes = propSplit[1];
+                                notesFilled++;
+                            };
+                        });
+
+                        // Removes current to-do entry from local storage
+                        localStorage.removeItem(localStorage.key(i));
+
+                        // Re-stores to-do object back in local storage, with new key
+                        Storage.prototype.setObject = function(key, value) {
+                            this.setItem(key, JSON.stringify(value));
+                        };
+
+                        if (descriptionFilled === 0) {
+                            localStorage.setObject(todoLocalName.count, todo(projectHome, localName, '', localDueDate, localPriority, localNotes));
+                        } else if (dueDateFilled === 0) {
+                            localStorage.setObject(todoLocalName.count, todo(projectHome, localName, localDescription, '', localPriority, localNotes));
+                        } else if (priorityFilled === 0) {
+                            localStorage.setObject(todoLocalName.count, todo(projectHome, localName, localDescription, localDueDate, '', localNotes));
+                        } else if (notesFilled === 0) {
+                            localStorage.setObject(todoLocalName.count, todo(projectHome, localName, localDescription, localDueDate, localPriority, ''));
+                        } else {
+                            localStorage.setObject(todoLocalName.count, todo(projectHome, localName, localDescription, localDueDate, localPriority, localNotes));
+                        };
+
+                        todoLocalName.count++;
+                    };
+                };
+            };
+        };
 
         // Remove project object
         let indexCount = 0;
@@ -233,84 +305,6 @@ const clickProject = (name) => {
     projectInfo.addEventListener('click', () => {
         // Changes currentProject
         currentProject.name = name;
-
-        // Load projects from local storage
-        if (localStorage.length > 0) {
-            for (let i = 0; i < localStorage.length; i++) {
-                const localProject = localStorage.getItem(localStorage.key(i));
-                let splitLocal = localProject.replace(/"/g, '');
-                let noBrackets = splitLocal.slice(1, -1);
-                let stringArray = noBrackets.split(',');
-
-                let localName;
-                let localDescription;
-                let localDueDate;
-                let localPriority;
-                let localNotes;
-                let dueDateFilled = 0;
-                let priorityFilled = 0;
-                let descriptionFilled = 0;
-                let notesFilled = 0;
-                const todoTest = /projectHome/g;
-
-                // Filters local storage for objects with a projectHome i.e. a to-do
-                if (stringArray.some(e => todoTest.test(e))) {
-                    // Filters for objects with currentProject.name as project home
-                    if (stringArray[0] === `projectHome:${currentProject.name}`) {
-                        stringArray.forEach((property) =>{
-                            let propSplit = property.split(':');
-                            if (propSplit.includes('title')) {
-                                localName = propSplit[1];
-                            } else if (propSplit.includes('description'))  {
-                                localDescription = propSplit[1];
-                                descriptionFilled++;
-                            } else if (propSplit.includes('dueDate'))  {
-                                localDueDate = propSplit[1];
-                                dueDateFilled++;
-                            } else if (propSplit.includes('priority'))  {
-                                localPriority = propSplit[1];
-                                priorityFilled++;
-                            } else if (propSplit.includes('notes'))  {
-                                localNotes = propSplit[1];
-                                notesFilled++;
-                            };
-                        });
-
-                        if (descriptionFilled === 0) {
-                            projects.list.forEach((object) => {
-                                if (currentProject.name === object.name) {
-                                    object.list.push(todo('General', localName, '', localDueDate, localPriority, localNotes));
-                                };
-                            });
-                        } else if (dueDateFilled === 0) {
-                            projects.list.forEach((object) => {
-                                if (currentProject.name === object.name) {
-                                    object.list.push(todo('General', localName, localDescription, '', localPriority, localNotes));
-                                };
-                            });
-                        } else if (priorityFilled === 0) {
-                            projects.list.forEach((object) => {
-                                if (currentProject.name === object.name) {
-                                    object.list.push(todo('General', localName, localDescription, localDueDate, '', localNotes));
-                                };
-                            });
-                        } else if (notesFilled === 0) {
-                            projects.list.forEach((object) => {
-                                if (currentProject.name === object.name) {
-                                    object.list.push(todo('General', localName, localDescription, localDueDate, localPriority, ''));
-                                };
-                            });
-                        } else {
-                            projects.list.forEach((object) => {
-                                if (currentProject.name === object.name) {
-                                    object.list.push(todo('General', localName, localDescription, localDueDate, localPriority, localNotes));
-                                };
-                            });
-                        };
-                    };
-                };
-            };
-        };
 
         // Removes existing project name, dueDate, and priority
         const currentTitle = document.getElementsByClassName('currentTitle');
