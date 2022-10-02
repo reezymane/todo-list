@@ -278,6 +278,8 @@ ppcSubmit.addEventListener('click', () => {
                         projectName.style.backgroundColor = 'rgb(255,165,0, 0.69)';
                     } else if (object.priority === 'Low') {
                         projectName.style.backgroundColor = 'rgb(255, 240, 0, 0.69)';
+                    } else {
+                        projectName.style.backgroundColor = 'transparent';
                     };
                 };
             });
