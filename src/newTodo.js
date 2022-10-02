@@ -55,19 +55,26 @@ const displayTodo = (list) => {
     todoDiv.appendChild(todoHeading);
     
     let flexCount = 0;
+    let wasOpen = 0;
     todoHeading.addEventListener('click', () => {
         currentTodo.name = list.title;
+ 
+        // Closes any open to-do
+        const closeHidden = document.querySelectorAll('[id$=Hidden]');
+        closeHidden.forEach((div) => {
+            if (div.id != (list.title + 'Hidden') && div.style.display === 'flex') {
+                div.style.display = 'none';
+            };
+        });
 
         // Expands to-do on click
         const hidden = document.getElementById(list.title + 'Hidden');
-        hidden.style.display = 'flex';
 
         // Collapses to-do on second click
-        if (flexCount === 1) {
-            hidden.style.display = 'none';
-            flexCount = 0;
+        if (hidden.style.display === 'none' || hidden.style.display === '') {
+            hidden.style.display = 'flex';
         } else {
-            flexCount++;
+            hidden.style.display = 'none';
         };
     });
 
