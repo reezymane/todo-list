@@ -210,9 +210,7 @@ const addProject = (name) => {
         closePPCForm();
     });
 
-};
-
-// Changes priority in project object
+    // Changes priority in project object
 const ppcSubmit = document.getElementById('ppcSubmit');
 ppcSubmit.addEventListener('click', () => {
     const ppcRadio = document.getElementsByName('ppc');
@@ -290,6 +288,9 @@ ppcSubmit.addEventListener('click', () => {
 
     closePPCForm();
 });
+};
+
+
 
 // Gets value for radio button selection
 const projectPri = () => {

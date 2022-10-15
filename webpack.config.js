@@ -2,12 +2,19 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    factories: './src/factories.js',
+    functions: './src/functions.js',
+    generalProject: './src/generalProject.js',
+    newProject: './src/newProject.js',
+    newTodo: './src/newTodo.js'
+  },
   devServer: {
     static: './dist',
   },
   output: {
-    filename: 'main.js',
+    filename: '[name].main.js',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {

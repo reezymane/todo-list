@@ -6,16 +6,6 @@ import Arrow from './img/arrow.png';
 import Trash from './img/trash.png';
 import {format, parseISO} from 'date-fns';
 
-// Gets value for to-do radio button selection
-const todoPri = () => {
-    const todoRadio = document.getElementsByName('todoPriority');
-    for (let i = 0; i < todoRadio.length; i++) {
-        if (todoRadio[i].checked) {
-            return todoRadio[i].value;
-        };
-    };
-};
-
 // Displays to-do
 const displayTodo = (list) => {
     const todoList = document.getElementsByClassName('todoList');
@@ -265,6 +255,18 @@ const displayTodo = (list) => {
     editTodoCancel.addEventListener('click', () => {
         closeEditTodoForm();
     });
+};
+
+// Submits a new to-do object to current project's list array
+const submitTodo = () => {
+// Gets value for to-do radio button selection
+const todoPri = () => {
+    const todoRadio = document.getElementsByName('todoPriority');
+    for (let i = 0; i < todoRadio.length; i++) {
+        if (todoRadio[i].checked) {
+            return todoRadio[i].value;
+        };
+    };
 };
 
 // Edit to-do property buttons open appropriate form
@@ -590,8 +592,7 @@ document.getElementById('tdpcCancel').addEventListener('click', () => {
     closeTDPCForm();
 });
 
-// Submits a new to-do object to current project's list array
-const submitTodo = () => {
+
     const todoSubmit = document.getElementById('todoSubmit');
     todoSubmit.addEventListener('click', () => {
         // Checks if to-do name already exists
