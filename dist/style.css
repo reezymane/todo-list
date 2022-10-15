@@ -1,0 +1,415 @@
+/*Removes margin and padding from all elements*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*Set primary background image*/
+.extraBackground {
+    background-image: url(./img/brown.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    max-width: 1920px;
+    min-width: min-content;
+    height: 1000px;
+}
+
+/*Set page direction, height/width and background border*/
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+
+    font-family: Comic Sans MS, Comic Sans, cursive;
+
+    height: 100%;
+    max-width: 1920px;
+    min-width: min-content;
+
+    background-image: url(./img/leaf.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+
+.mainContainer {
+    flex: 1;
+    display: flex;
+}
+
+.listContainer {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 50px;
+    margin-left: 200px;
+}
+
+.content {
+    flex: 1;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+}
+
+/*Sidebar background, width/height, border and padding*/
+.sidebar {
+    background-color: rgba(250, 235, 215, 0.691);
+
+    border-radius: 15px;
+
+    height: 80%;
+    min-width: 250px;
+
+    margin-left: 100px;
+
+    padding: 20px 30px;
+}
+
+ /*Set height and alignment of header*/
+header {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Header background color, border, content alignment, font and padding*/
+header div {
+    background-color: rgba(250, 235, 215, 0.691);
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 30px 100px;
+
+    font-size: 25px;
+}
+
+/*Title styling*/
+header div p:first-child {
+    font-size: 40px;
+
+    text-decoration: underline;
+
+    font-style: italic;
+}
+
+/*Project title size and element spacing*/
+.projectTitle {
+    font-size: 22px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 2px solid rgb(99, 99, 99);
+
+    padding-bottom: 7px;
+}
+
+/*New project button styling*/
+.newProject {
+    border-radius: 20px;
+    border-color: antiquewhite;
+
+    padding: 5px 5px;
+
+    background-color: rgba(127, 193, 251, 0.876);
+}
+
+/*New project button image size*/
+.newProject img {
+    height: 25px;
+    width: 25px;
+}
+
+/*General project alignment*/
+#General {
+    display: flex;
+    gap: 5px;
+
+    border-bottom: 1px solid rgba(99, 99, 99, 0.552);
+
+    padding: 7px 7px 7px 7px;
+}
+
+#General span {
+    opacity: 0;
+}
+
+#General p {
+    padding-left: 5px;
+}
+
+/*Aligns project divs*/
+div[id$='Outer'] {
+    display: flex;
+    flex-direction: column;
+
+    border-bottom: 1px solid rgba(99, 99, 99, 0.552);
+    padding: 7px 7px 7px 7px;
+}
+
+div[id$='Outer'] div:first-child {
+    display: grid;
+    grid-template: min-content min-content / min-content 1fr;
+    column-gap: 5px;
+}
+
+/*Hides hyphen next to project names*/
+div[id$='Outer'] div:first-child span {
+    opacity: 0;
+}
+
+div[id$='Outer'] div:first-child span + p {
+    border-radius: 5px;
+    padding: 2px 0 2px 5px;
+    
+    /*Add ellipsis to long titles that overflow*/
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div[id$='Outer'] div:first-child p:last-child {
+    grid-column-start: 2;
+
+    font-size: 12px;
+}
+
+/*Aligns and hides remove and priority buttons*/
+div[id$='Buttons'] {
+    display: none;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/*Adds styling to project buttons*/
+div[id$='Buttons'] button {
+    border-radius: 20px;
+    border-color: antiquewhite;
+
+    padding: 2px 2px;
+
+    background-color: rgba(109, 252, 169, 0.69);
+}
+
+div[id$='Buttons'] button img {
+    height: 20px;
+    width: 20px;
+}
+
+/*Bottom border current project div*/
+.currentProject {
+    border-bottom: 3px solid black;
+    padding: 0 50px 5px 50px;
+    margin-bottom: 40px;
+    display: flex;
+}
+
+.currentTitle {
+    flex: 1;
+    font-size: 40px;
+}
+
+.projectDue p + p {
+    padding: 0 15px;
+    width: min-content;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.projects {
+    height: 580px;
+    overflow-y: scroll;
+}
+
+.todoList {
+    padding: 0 25px;
+    height: 517px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: scroll;
+}
+
+/*scrollbar width */
+::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+/*scrollbar Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+  
+/*scrollbar Handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(250, 235, 215, 0.641);
+    border-radius: 10px;
+}
+
+/*Right align new to-do button*/
+.newTodoContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/*Styling for new to-do button*/
+.newTodo {
+    border-radius: 25px;
+    border-color: antiquewhite;
+    padding: 5px 15px;
+    background-color: rgba(127, 193, 251, 0.876);
+    color: white;
+    font-size: 35px;
+}
+
+/*Styling for footer*/
+footer {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ghostwhite;
+    font-size: 20px;
+}
+
+/*Background color and layout of list divs*/
+.todoList div[id$='Div'] {
+    background-color: rgba(250, 235, 215, 0.691);
+    border-radius: 15px;
+    padding: 15px 25px;
+    display: grid;
+    grid-template: min-content min-content / min-content 1fr 100px;
+    column-gap: 15px;
+}
+
+/*Layout of to-do heading*/
+div[id$='Div'] div[id$='Heading'] {
+    display: flex;
+    flex-direction: column;
+}
+
+div[id$='Heading'] p + p {
+    color: rgb(96, 96, 96);
+
+    padding-left: 10px;
+}
+
+div[id$='Heading2'] {
+    display: flex;
+    align-items: center;
+}
+
+div[id$='CompleteContainer'] {
+    grid-row: 1 / 3;
+}
+
+/*Styling of Mark Complete button*/
+button[id$='Complete'] {
+    border: 2px solid antiquewhite;
+    border-radius: 25px;
+    color: rgba(106, 108, 111, 0);
+    background-color: rgba(240, 248, 255, 0);
+
+    padding: 5px 7px;
+}
+
+div[id$='Hidden'] {
+    grid-column: 1 / 4;
+    display: none;
+    flex-direction: column;
+}
+
+/*Adds styling to to-do buttons*/
+div[id$='RemovePri'] button {
+    border-radius: 20px;
+    border-color: antiquewhite;
+
+    padding: 2px 2px;
+
+    background-color: rgba(109, 252, 169, 0.69);
+
+    margin-top: 20px;
+}
+
+div[id$='RemovePri'] {
+    align-self: flex-end;
+    display: flex;
+    gap: 10px;
+}
+
+button[id$='Button'] img {
+    height: 20px;
+    width: 20px;
+}
+
+/*Styling for Priority*/
+div[id$='PriorityNotes'] p:first-child {
+    font-size: 13px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    padding: 0 15px;
+    width: min-content;
+    margin-left: 15px;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+div[id$='PriorityNotes'] p + p {
+    overflow-wrap: break-word;
+}
+
+ /*Styling for forms*/
+form {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, 5%);
+    border: 3px solid #2f2f2f5f;
+    z-index: 9;
+
+    background-color: rgba(245, 242, 220, 0.9);
+    border-radius: 10px;
+
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 10px;
+}
+
+/*Style form buttons*/
+form button {
+    border-radius: 20px;
+    border-color: antiquewhite;
+    background-color: rgba(109, 252, 169, 0.69);
+    color: white;
+    font-size: 17px;
+    padding: 5px 10px;
+}
+
+/*Center form buttons*/
+form div:last-child {
+    align-self: center;
+    display: flex;
+    gap: 15px;
+}
+
+/*Edit property form*/
+form#editTodo div:first-child {
+    display: flex;
+    flex-direction: column;
+}
+
+form#editTodo div:first-child .editProperty {
+    background-color: rgba(127, 193, 251, 0.876);
+}
